@@ -121,14 +121,12 @@
         while ($row = fetch_array($query)) {
              $firstname = $row['user_fname'];
         } 
-        return $firstname;
+        return $firstname  ;
     }
-    function returncurrentdate24HRFULLDAY() {
-        $datenow = date('Y-m-d H:s:i'); 
-        return $datenow;
+    function FullDateFormat24HR() {
+      return  date("Y-m-d H:m:i");
     }
-    function returncurrentdate1DAY() {
-        $datenow = date('Y-m-d'); 
-        return $datenow;
+    function ReturnDateFormat() {
+      return  date("Y-m-d");
     }
 ?>

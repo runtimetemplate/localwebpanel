@@ -10,6 +10,9 @@
     $contact_no           = $_POST['contactno'];
     $user_pass            = $_POST['password'];
     $image_base64         = '';
+    
+    $datenow = FullDateFormat24HR();
+
     $password = base64_encode($user_pass);
     $password_crypt = md5($password);
     if($_FILES['image']['size'] == 0 && $_FILES['image']['error'] == 0){

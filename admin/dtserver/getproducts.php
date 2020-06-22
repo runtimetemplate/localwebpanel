@@ -50,8 +50,8 @@ $columns = array(
 require('../../resources/ssp.class.php');
 // Output data as json format
 echo json_encode(
-    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns)
-    //SSP::complex ( $_GET, $dbDetails, $table, $primaryKey, $columns, $whereResult=null, $whereAll=' user_role = "Client"')
+    //SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns)
+    SSP::complex ( $_GET, $dbDetails, $table, $primaryKey, $columns, $whereResult=null, $whereAll=' product_status = 1')
 );
 
 ?>
