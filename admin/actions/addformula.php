@@ -10,10 +10,11 @@ $serving_unit 	     = $_POST['serving_unit'];
 $serving_value 	 	 = $_POST['serving_value'];
 $no_servings 		 = $_POST['no_servings'];
 $unit_cost 		     = $_POST['unit_cost'];
-$sql = "INSERT INTO `admin_product_formula_org`(`product_ingredients`, `primary_unit`, `primary_value`, `secondary_unit`, `secondary_value`, `serving_unit`, `serving_value`, `no_servings`, `status`,`unit_cost`) VALUES ('$product_ingredients','$primary_unit','$primary_value','$secondary_unit','$secondary_value','$serving_unit','$serving_value','$no_servings',1,'$unit_cost')";
+$datenow = FullDateFormat24HR();
+$sql = "INSERT INTO `admin_product_formula_org`(`date_modified`,`product_ingredients`, `primary_unit`, `primary_value`, `secondary_unit`, `secondary_value`, `serving_unit`, `serving_value`, `no_servings`, `status`,`unit_cost`,`origin`) VALUES ('$datenow','$product_ingredients','$primary_unit','$primary_value','$secondary_unit','$secondary_value','$serving_unit','$serving_value','$no_servings',1,'$unit_cost','Server')";
 $result = query($sql);
 echo '<script>';
 echo 'alert("Added Successfully");';
 echo 'self.location = "../index.php?defform";';
 echo '</script>';
-?>
+?>x`

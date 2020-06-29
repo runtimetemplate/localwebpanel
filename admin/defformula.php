@@ -136,7 +136,8 @@ function editformula(id) {
   window.location.href = "editformulapage.php?id=" + id; 
 }
 $( document ).ready(function() {
-  LoadDatatable()
+  LoadDatatable();
+
 });
 function deleteformula(id) {
   var r = confirm("Are you sure do you want to delete this ingredient ?");

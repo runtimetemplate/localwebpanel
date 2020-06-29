@@ -170,7 +170,34 @@ function LoadDatatable() {
   });
 }
 </script>
+
 <?php include 'modals/addproductmodal.php'?>
+  <script> 
+    function disableSelect(id) {
+      // var category = document.getElementById("SelCategory").value;
+      // alert(category);
+      // if (category == "Others") {
+      //   $("#SelInVat").selectmenu("enable");
+      // } else {
+      //   $("#SelInVat").selectmenu("disable");
+      // }
+
+      $('SelCategory').on('change', function() {
+  alert( this.value );
+});
+      // $("#nativeSelectMenu").selectmenu("disable");
+      // $("#customSelectMenu").selectmenu("disable");
+    }
+    function getval(sel)
+    {
+      if (sel == "Others") {
+        document.getElementById("SelInVat").disabled=true;
+      } else {  
+          document.getElementById("SelInVat").disabled=false;
+      }
+
+    }
+</script> 
 </body>
 </html>
     

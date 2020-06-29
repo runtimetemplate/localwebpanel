@@ -46,7 +46,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="input-group mb-3">              
-                  <select class="form-control" name="pcat" required> 
+                  <select class="form-control" name="pcat" required id="SelCategory" onchange="getval(this)"> 
                     <option value="">Select Category</option>
                       <?php
                       include_once '../resources/conn.php';
@@ -79,10 +79,30 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-md-12">
                 <div class="input-group mb-3">
                   <input type="text" id="appendformulaid" name="pf" class="form-control" required>
-                </div>
+                </div>                
+              </div>
             </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-group mb-3">              
+                  <select class="form-control" name="invcat" id="SelInVat"> 
+                    <option value="0">Select Ingredients</option>
+                      <?php
+                      include_once '../resources/conn.php';
+                      include_once '../resources/functions.php';
+                      $sql = "SELECT formula_id , product_ingredients FROM admin_product_formula_org";
+                      $result = query($sql);
+                      while($row = mysqli_fetch_assoc($result)) {
+                        echo '<option value="'.$row['formula_id'].'">'.$row['product_ingredients'].'</option>';
+                      }
+                      ?>
+                  </select>     
+                </div>         
+              </div>
+            </div>      
           </div>
         </div>
         <div class="modal-footer justify-content-between">

@@ -1,4 +1,5 @@
 <?php
+    date_default_timezone_set('Asia/Manila');
     include_once("conn.php");
     function query($sql){	
 		global $connection;

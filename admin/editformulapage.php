@@ -89,7 +89,7 @@ $unit_cost = $row['unit_cost'];
                   </div> 
                   <div class="col-md-3">
                     <label>Number of Servings</label>
-                    <input type="number" class="form-control" required name="no_servings" value="<?php echo $no_servings;?>">
+                    <input type="decimal" class="form-control" required name="no_servings" value="<?php echo $no_servings;?>">
                   </div>            
                 </div>
 

@@ -19,8 +19,8 @@ $columns = array(
             'db' => 'product_ingredients',
             'dt' => 0
         ),
-    array( 'db' => 'stock_quantity', 'dt' => 1 ),
-    array( 'db' => 'stock_total', 'dt' => 2 ),
+    array( 'db' => 'stock_primary', 'dt' => 1 ),
+    array( 'db' => 'stock_secondary', 'dt' => 2 ),
     array( 'db' => 'critical_limit', 'dt' => 3 ),
     array( 'db' => 'date_modified', 'dt' => 4 ),
     array( 
