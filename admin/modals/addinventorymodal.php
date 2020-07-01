@@ -22,6 +22,27 @@
                   <input type="text" class="form-control"  name="critical_limit" required value="">  
                 </div>
             </div>
+            <div class="row">
+              <label>Main Product</label>       
+              <div class="input-group mb-3">
+                  <select class="form-control input-sm" name="maininventoryid">
+                    <option value="">Select Main Ingredient</option>
+                    <?php
+                    include_once('../resources/conn.php');
+                    include_once('../resources/functions.php');
+                    $query = query("SELECT * FROM admin_pos_inventory_org");
+                    confirm($query);
+                    while($row = mysqli_fetch_array($query)) {
+                    $brand_id= $row['inventory_id'];
+                    $brand_name = $row['product_ingredients'];
+                    ?>
+                    <option name="" value="<?php echo $inventory_id; ?>">
+                    <?php echo $row['product_ingredients']; ?>
+                    </option>
+                  <?php } ?>
+                  </select>
+              </div>
+            </div>
           </div>          
         </div>
         <div class="modal-footer justify-content-between">

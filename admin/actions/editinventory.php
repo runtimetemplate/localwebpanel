@@ -22,6 +22,21 @@ echo '
 	    	<input type="text" class="form-control"  name="critical_limit"  required value="'.$critical_limit.'">  
 	  	</div>
 	</div>
-</div>';
-?>
+	<div class="row">
+  		<label>Main Product</label>       
+  			<div class="input-group mb-3">
+      			<select class="form-control input-sm" name="maininventoryid">
+      				<option value="">Select Main Ingredient</option>';
+        			$query = query("SELECT * FROM admin_pos_inventory_org");
+        			confirm($query);
+     	  			while($row = mysqli_fetch_array($query)) {
 
+        			echo '<option name="" value="'.$row['inventory_id'].'">' . $row['product_ingredients'] . '</option>';
+        			}
+        			echo '
+        		</select>
+  			</div>
+		</div>
+	</div>';
+
+?>
