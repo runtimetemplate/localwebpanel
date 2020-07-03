@@ -26,7 +26,7 @@ echo '
   		<label>Main Product</label>       
   			<div class="input-group mb-3">
       			<select class="form-control input-sm" name="maininventoryid">
-      				<option value="">Select Main Ingredient</option>';
+      				<option value="0">Select Main Ingredient</option>';
         			$query = query("SELECT * FROM admin_pos_inventory_org");
         			confirm($query);
      	  			while($row = mysqli_fetch_array($query)) {

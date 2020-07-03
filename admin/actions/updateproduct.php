@@ -17,8 +17,9 @@ $product_formula = $_POST['pf'];
 $product_code = $_POST['pcode'];
 $product_barcode = $_POST['pb'];
 $datenow = FullDateFormat24HR();
+$maininventory = $_POST['maininv'];
 
-$sql = "UPDATE admin_products_org SET `product_sku`= '$product_code',`product_name`='$product_name',`formula_id`='$product_formula',`product_barcode`='$product_barcode',`product_category`='$product_category',`product_price`='$product_price',`product_desc`='$product_desc',`product_image`='$product_image',`date_modified`='$datenow' WHERE product_id = " . $_GET['id'];
+$sql = "UPDATE admin_products_org SET `product_sku`= '$product_code',`product_name`='$product_name',`formula_id`='$product_formula',`product_barcode`='$product_barcode',`product_category`='$product_category',`product_price`='$product_price',`product_desc`='$product_desc',`product_image`='$product_image',`date_modified`='$datenow',`inventory_id`='$maininventory' WHERE product_id = " . $_GET['id'];
 $result = query($sql);
 echo '<script>';
 echo 'alert("Updated Successfully");';

@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-formula">
+  <div class="modal fade" id="modal-formula">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -81,11 +81,11 @@
           <div class="row">
             <div class="col-md-6">
               <label>Number of Servings</label>
-              <input type="number" class="form-control" required name="no_servings" value="">
+              <input type="double" class="form-control" required name="no_servings" value="">
             </div> 
-            <div class="col-md-6">
+            <div class="col-md-6">  
               <label>Unit Cost</label>
-              <input type="decimal" class="form-control" required name="unit_cost" value="">
+              <input type="double" class="form-control" required name="unit_cost" value="">
             </div>  
           </div>    
         </div>

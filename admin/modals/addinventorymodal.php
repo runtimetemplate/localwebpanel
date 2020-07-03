@@ -26,17 +26,15 @@
               <label>Main Product</label>       
               <div class="input-group mb-3">
                   <select class="form-control input-sm" name="maininventoryid">
-                    <option value="">Select Main Ingredient</option>
+                    <option value="0">Select Main Ingredient</option>
                     <?php
                     include_once('../resources/conn.php');
                     include_once('../resources/functions.php');
                     $query = query("SELECT * FROM admin_pos_inventory_org");
                     confirm($query);
-                    while($row = mysqli_fetch_array($query)) {
-                    $brand_id= $row['inventory_id'];
-                    $brand_name = $row['product_ingredients'];
+                    while($row = mysqli_fetch_array($query)) {                                       
                     ?>
-                    <option name="" value="<?php echo $inventory_id; ?>">
+                    <option name="" value="<?php echo $row['inventory_id']; ?>">
                     <?php echo $row['product_ingredients']; ?>
                     </option>
                   <?php } ?>

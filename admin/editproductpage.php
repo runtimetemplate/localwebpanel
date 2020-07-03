@@ -144,6 +144,31 @@ $product_desc = $row['product_desc'];
             </div>	
             <div class="card card-default">
               <div class="card-header">
+                <h3 class="card-title">Exclusive for mixed products only</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <select class="custom-select" id="maininv" name="maininv">
+                      <option value="0">Select Ingredients</option>
+                      <?php
+                      include_once '../resources/conn.php';
+                      include_once '../resources/functions.php';
+                      $sql = "SELECT formula_id , product_ingredients FROM admin_product_formula_org";
+                      $result = query($sql);
+                      while($row = mysqli_fetch_assoc($result)) {
+                        echo '<option value="'.$row['formula_id'].'">'.$row['product_ingredients'].'</option>';
+                      }
+                      ?>
+                    </select>
+
+                  </div>
+
+                </div>                  
+              </div>
+            </div>  
+            <div class="card card-default">
+              <div class="card-header">
                 <h3 class="card-title">Image <i>(Click the image to edit or update)</i></h3>
               </div>
               <div class="card-body">

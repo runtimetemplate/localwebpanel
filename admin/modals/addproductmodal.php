@@ -87,6 +87,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
+                <label>Exclusive for mixed products only</label>
                 <div class="input-group mb-3">              
                   <select class="form-control" name="invcat" id="SelInVat"> 
                     <option value="0">Select Ingredients</option>
