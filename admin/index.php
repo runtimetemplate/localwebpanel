@@ -28,6 +28,9 @@
     if(isset($_GET['definv'])) {
         include("definventory.php");
     }
+    if(isset($_GET['pmanagement'])) {
+        include("pmanagement.php");
+    }
   }
 ?>
 <script type="text/javascript">

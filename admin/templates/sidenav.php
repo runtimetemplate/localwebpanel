@@ -89,6 +89,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="index.php?pmanagement"class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?pmanagement")?"active":"";?>">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Price Management
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>

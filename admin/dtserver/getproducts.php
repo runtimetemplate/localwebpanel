@@ -16,12 +16,13 @@ $primaryKey = 'product_id';
 // 
 $columns = array(
     array( 
-            'db' => 'product_image',
-            'dt' => 0,
-            'formatter' => function( $d, $row ) {
-                return ('<img src="data:image/png;base64,'.$d.'" class="img-size-50 mr-3 img-circle"
-                style="opacity: .8; height: 40px;">');
-            }
+        'db' => 'product_sku', 'dt' => 0
+            // 'db' => 'product_image',
+            // 'dt' => 0,
+            // 'formatter' => function( $d, $row ) {
+            //     return ('<img src="data:image/png;base64,'.$d.'" class="img-size-50 mr-3 img-circle"
+            //     style="opacity: .8; height: 40px;">');
+            // }
         ),
     array( 'db' => 'product_sku', 'dt' => 1 ),
     array( 'db' => 'product_price', 'dt' => 2 ),
