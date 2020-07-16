@@ -7,7 +7,7 @@ $critical_limit = $_POST['critical_limit'];
 $datenow = FullDateFormat24HR();
 $maininventoryid = $_POST['maininventoryid'];
 
-$sql = "UPDATE `admin_pos_inventory_org` SET `product_ingredients`='$product_ingredients',`critical_limit`= $critical_limit ,`date_modified`= '$datenow',`main_inventory_id`= $maininventoryid WHERE inventory_id = " . $inventory_id;
+$sql = "UPDATE `admin_pos_inventory_org` SET `product_ingredients`='$product_ingredients',`critical_limit`= $critical_limit ,`date_modified`= '$datenow',`main_inventory_id`= $maininventoryid WHERE server_inventory_id = " . $inventory_id;
 $result = mysqli_query($connection, $sql);
 // echo $sql;
 echo '<script>';

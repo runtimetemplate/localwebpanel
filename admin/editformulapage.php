@@ -2,7 +2,7 @@
 include '../resources/conn.php';
 include '../resources/functions.php';
 $formula_id =  $_GET['id'];
-$sql = "SELECT * FROM admin_product_formula_org WHERE formula_id = " . $formula_id;
+$sql = "SELECT * FROM admin_product_formula_org WHERE server_formula_id = " . $formula_id;
 $result = query($sql);
 $row = mysqli_fetch_array($result);
 $product_ingredients = $row['product_ingredients'];

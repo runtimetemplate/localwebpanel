@@ -9,7 +9,7 @@ $dbDetails = array(
 // DB table to use
 $table = 'admin_product_formula_org';
 // Table's primary key
-$primaryKey = 'formula_id';
+$primaryKey = 'server_formula_id';
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database. 
 // The `dt` parameter represents the DataTables column identifier.
@@ -44,7 +44,7 @@ $columns = array(
     array( 'db' => 'unit_cost', 'dt' => 10 ),
 
     array( 
-        'db' => 'formula_id',
+        'db' => 'server_formula_id',
         'dt' => 11 , 
         'formatter' => function( $d, $row ) {
         return ('<div class="btn-group"><button type="button" class="btn btn-info bg-gr" id='.$d.' onclick="editformula(this.id)"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-danger" id='.$d.' onclick="deleteformula(this.id)"><i class="fas fa-trash-alt"></i></button></div>');

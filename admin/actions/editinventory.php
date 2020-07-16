@@ -2,7 +2,7 @@
 include '../../resources/conn.php';
 include '../../resources/functions.php';
 $inventory_id = $_POST['id'];
-$sql = "SELECT  product_ingredients , critical_limit  FROM admin_pos_inventory_org WHERE inventory_id = " . $inventory_id;
+$sql = "SELECT  product_ingredients , critical_limit  FROM admin_pos_inventory_org WHERE server_inventory_id = " . $inventory_id;
 $result = query($sql);
 $row = mysqli_fetch_array($result);
 $product_ingredients = $row['product_ingredients'];
