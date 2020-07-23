@@ -34,7 +34,7 @@
                     confirm($query);
                     while($row = mysqli_fetch_array($query)) {                                       
                     ?>
-                    <option name="" value="<?php echo $row['inventory_id']; ?>">
+                    <option value="<?php echo $row['server_inventory_id']; ?>">
                     <?php echo $row['product_ingredients']; ?>
                     </option>
                   <?php } ?>

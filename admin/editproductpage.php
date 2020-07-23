@@ -13,6 +13,7 @@ $product_price = $row['product_price'];
 $formula = $row['formula_id'];
 $productcategory = $row['product_category'];
 $product_desc = $row['product_desc'];
+$addonstype = $row['addontype'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,31 +93,97 @@ $product_desc = $row['product_desc'];
                 
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                        Product Category
+                    </h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <select class="custom-select" id="selectCat" name="pc">
+                        <option value="">Select Category</option>
+                          <?php
+                          include_once '../resources/conn.php';
+                          include_once '../resources/functions.php';
+                          $sql = "SELECT category_id , category_name FROM admin_category";
+                          $result = query($sql);
+                          while($row = mysqli_fetch_assoc($result)) {
+                            echo '<option value="'.$row['category_name'].'">'.$row['category_name'].'</option>';
+                          }
+                          ?>
+                      </select>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+              <div class="col-md-4">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Exclusive for mixed products only(Others)</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <div class="input-group mb-3">
+                        <select class="custom-select" id="maininv" name="maininv">
+                          <option value="0">Select Ingredients</option>
+                          <?php
+                          include_once '../resources/conn.php';
+                          include_once '../resources/functions.php';
+                          $sql = "SELECT server_formula_id , product_ingredients FROM admin_product_formula_org";
+                          $result = query($sql);
+                          while($row = mysqli_fetch_assoc($result)) {
+                            echo '<option value="'.$row['server_formula_id'].'">'.$row['product_ingredients'].'</option>';
+                          }
+                          ?>
+                        </select>
+                      </div>
+                    </div>                  
+                  </div>
+                </div> 
+              </div>
+              <div class="col-md-4">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Exclusive for premium fillings(Add-Ons Category)</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <div class="input-group mb-3">
+                        <select class="form-control" name="addonstype"> 
+                          <?php
+                          echo $addonstype;
+                          if ($addonstype == "N/A") {
+                          ?>
+                            <option value="N/A">N/A</option>
+                            <option value="Classic">Classic</option>
+                            <option value="Premium">Premium</option>
+                          <?php 
+                          } elseif ($addonstype == "Classic") {
+                          ?>
+                            <option value="Classic">Classic</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Premium">Premium</option>
+                          <?php 
+                          } elseif ($addonstype == "Premium") {
+                          ?>
+                            <option value="Premium">Premium</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Classic">Classic</option>
+                          <?php                      
+                          }          
+                          ?>
+                        </select> 
+                      </div>
+                    </div>                  
+                  </div>
+                </div> 
+              </div>
+            </div>
         	</section>
         	<section class="col-lg-3">
-  			    <div class="card card-default">
-            	<div class="card-header">
-              	<h3 class="card-title">
-                		Product Category
-              	</h3>
-            	</div>
-            	<div class="card-body">
-            		<div class="form-group">
-            			<select class="custom-select" id="selectCat" name="pc">
-            				<option value="">Select Category</option>
-              				<?php
-              				include_once '../resources/conn.php';
-              				include_once '../resources/functions.php';
-              				$sql = "SELECT category_id , category_name FROM admin_category";
-              				$result = query($sql);
-              				while($row = mysqli_fetch_assoc($result)) {
-              					echo '<option value="'.$row['category_name'].'">'.$row['category_name'].'</option>';
-              				}
-              				?>
-            			</select>
-            		</div>
-            	</div>
-            </div>	
   			    <div class="card card-default">
               <div class="card-header">
                 <h3 class="card-title">Product Formula's</h3>
@@ -129,10 +196,10 @@ $product_desc = $row['product_desc'];
   	              		<?php
               				include_once '../resources/conn.php';
               				include_once '../resources/functions.php';
-              				$sql = "SELECT formula_id , product_ingredients FROM admin_product_formula_org";
+              				$sql = "SELECT server_formula_id , product_ingredients FROM admin_product_formula_org";
               				$result = query($sql);
               				while($row = mysqli_fetch_assoc($result)) {
-              					echo '<option value="'.$row['formula_id'].'">'.$row['product_ingredients'].'</option>';
+              					echo '<option value="'.$row['server_formula_id'].'">'.$row['product_ingredients'].'</option>';
               				}
               				?>
   	              	</select>
@@ -141,32 +208,7 @@ $product_desc = $row['product_desc'];
                   <input type="text" id="appendformulaid" name="pf" class="form-control" value="<?php echo $formula; ?>">
                 </div>	                
               </div>
-            </div>	
-            <div class="card card-default">
-              <div class="card-header">
-                <h3 class="card-title">Exclusive for mixed products only</h3>
-              </div>
-              <div class="card-body">
-                <div class="form-group">
-                  <div class="input-group mb-3">
-                    <select class="custom-select" id="maininv" name="maininv">
-                      <option value="0">Select Ingredients</option>
-                      <?php
-                      include_once '../resources/conn.php';
-                      include_once '../resources/functions.php';
-                      $sql = "SELECT formula_id , product_ingredients FROM admin_product_formula_org";
-                      $result = query($sql);
-                      while($row = mysqli_fetch_assoc($result)) {
-                        echo '<option value="'.$row['formula_id'].'">'.$row['product_ingredients'].'</option>';
-                      }
-                      ?>
-                    </select>
-
-                  </div>
-
-                </div>                  
-              </div>
-            </div>  
+            </div>	 
             <div class="card card-default">
               <div class="card-header">
                 <h3 class="card-title">Image <i>(Click the image to edit or update)</i></h3>

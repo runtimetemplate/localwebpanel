@@ -5,7 +5,7 @@ $product_ingredients = $_POST['product_ingredients'];
 $critical_limit = $_POST['critical_limit'];
 $maininventoryid = $_POST['maininventoryid'];
 
-$sql = 'SELECT MAX(formula_id) AS FormulaID FROM admin_pos_inventory_org';
+$sql = 'SELECT MAX(server_formula_id) AS FormulaID FROM admin_pos_inventory_org';
 $result = query($sql);
 $row = mysqli_fetch_array($result);
 $formula_id = $row['FormulaID'] + 1 ;

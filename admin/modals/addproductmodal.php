@@ -67,10 +67,10 @@
                       <?php
                       include_once '../resources/conn.php';
                       include_once '../resources/functions.php';
-                      $sql = "SELECT formula_id , product_ingredients FROM admin_product_formula_org";
+                      $sql = "SELECT server_formula_id , product_ingredients FROM admin_product_formula_org";
                       $result = query($sql);
                       while($row = mysqli_fetch_assoc($result)) {
-                        echo '<option value="'.$row['formula_id'].'">'.$row['product_ingredients'].'</option>';
+                        echo '<option value="'.$row['server_formula_id'].'">'.$row['product_ingredients'].'</option>';
                       }
                       ?>
                   </select>   
@@ -87,23 +87,35 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <label>Exclusive for mixed products only</label>
+                <label>Exclusive for premium fillings only(Add-Ons Category)</label>
+                <div class="input-group mb-3">              
+                  <select class="form-control" name="addonstype"> 
+                    <option value="N/A">Select Add-On type</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Premium">Premium</option>
+                  </select>     
+                </div>         
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-md-12">
+                <label>Exclusive for mixed products only(Others Category)</label>
                 <div class="input-group mb-3">              
                   <select class="form-control" name="invcat" id="SelInVat"> 
                     <option value="0">Select Ingredients</option>
                       <?php
                       include_once '../resources/conn.php';
                       include_once '../resources/functions.php';
-                      $sql = "SELECT formula_id , product_ingredients FROM admin_product_formula_org";
+                      $sql = "SELECT server_formula_id , product_ingredients FROM admin_product_formula_org";
                       $result = query($sql);
                       while($row = mysqli_fetch_assoc($result)) {
-                        echo '<option value="'.$row['formula_id'].'">'.$row['product_ingredients'].'</option>';
+                        echo '<option value="'.$row['server_formula_id'].'">'.$row['product_ingredients'].'</option>';
                       }
                       ?>
                   </select>     
                 </div>         
               </div>
-            </div>      
+            </div>     
           </div>
         </div>
         <div class="modal-footer justify-content-between">
