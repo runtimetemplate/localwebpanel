@@ -22,6 +22,12 @@
                   <input type="text" class="form-control"  name="critical_limit" required value="">  
                 </div>
             </div>
+            <div class="row">  
+              <label>Inventory Code</label>       
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control"  name="sku" required value="">  
+                </div>
+            </div>
             <div class="row">
               <label>Main Product</label>       
               <div class="input-group mb-3">

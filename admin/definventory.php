@@ -70,6 +70,7 @@
                   <tr>
                     <th>Ingredient Name</th>
                     <th>Stock Quantity</th>
+                    <th>sku</th>
                     <th>Stock Total</th>
                     <th>Critical Limit</th>   
                     <th>Date Modified</th>
@@ -80,6 +81,7 @@
                   <tr>
                     <th>Ingredient Name</th>
                     <th>Stock Quantity</th>
+                    <th>sku</th>
                     <th>Stock Total</th>
                     <th>Critical Limit</th>   
                     <th>Date Modified</th>

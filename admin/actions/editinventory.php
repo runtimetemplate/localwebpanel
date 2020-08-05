@@ -2,11 +2,13 @@
 include '../../resources/conn.php';
 include '../../resources/functions.php';
 $inventory_id = $_POST['id'];
-$sql = "SELECT  product_ingredients , critical_limit  FROM admin_pos_inventory_org WHERE server_inventory_id = " . $inventory_id;
+$sql = "SELECT  product_ingredients , critical_limit , sku  FROM admin_pos_inventory_org WHERE server_inventory_id = " . $inventory_id;
 $result = query($sql);
 $row = mysqli_fetch_array($result);
 $product_ingredients = $row['product_ingredients'];
 $critical_limit 	 = $row['critical_limit'];
+$sku 	 = $row['sku'];
+
 echo '
 <div class="card-body">
 <input type="hidden" class="form-control"  name="inventory_id" value="'.$inventory_id.'"> 
@@ -20,6 +22,12 @@ echo '
 		<label>Critital Limit</label>       
 	  	<div class="input-group mb-3">
 	    	<input type="text" class="form-control"  name="critical_limit"  required value="'.$critical_limit.'">  
+	  	</div>
+	</div>
+	<div class="row">  
+		<label>Inventory Code</label>       
+	  	<div class="input-group mb-3">
+	    	<input type="text" class="form-control"  name="sku"  required value="'.$sku.'">  
 	  	</div>
 	</div>
 	<div class="row">

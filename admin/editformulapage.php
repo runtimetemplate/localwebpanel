@@ -115,7 +115,7 @@ $unit_cost = $row['unit_cost'];
                   </div> 
                   <div class="col-md-3">
                     <label>Unit Cost</label>
-                    <input type="number" class="form-control" required name="unit_cost" value="<?php echo $unit_cost;?>">
+                    <input type="decimal" class="form-control" required name="unit_cost" value="<?php echo $unit_cost;?>">
                   </div>           
                 </div>
                 <div class="row">

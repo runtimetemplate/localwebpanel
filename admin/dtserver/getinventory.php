@@ -20,12 +20,13 @@ $columns = array(
             'dt' => 0
         ),
     array( 'db' => 'stock_primary', 'dt' => 1 ),
-    array( 'db' => 'stock_secondary', 'dt' => 2 ),
-    array( 'db' => 'critical_limit', 'dt' => 3 ),
-    array( 'db' => 'date_modified', 'dt' => 4 ),
+    array( 'db' => 'sku', 'dt' => 2 ),
+    array( 'db' => 'stock_secondary', 'dt' => 3 ),
+    array( 'db' => 'critical_limit', 'dt' => 4 ),
+    array( 'db' => 'date_modified', 'dt' => 5 ),
     array( 
         'db' => 'stock_status', 
-        'dt' => 5,
+        'dt' => 6,
         'formatter' => function( $d, $row ) { 
             if ($d == '1') {
                 return 'Active';
@@ -36,7 +37,7 @@ $columns = array(
          ),
     array( 
         'db' => 'server_inventory_id',
-        'dt' => 6 , 
+        'dt' => 7 , 
         'formatter' => function( $d, $row ) {
         return ('<div class="btn-group"><button type="button" class="btn btn-info bg-gr" id='.$d.' onclick="editinventory(this.id)"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-danger" id='.$d.' onclick="deleteinventory(this.id)"><i class="fas fa-trash-alt"></i></button></div>');
         })
