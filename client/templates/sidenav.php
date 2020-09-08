@@ -24,7 +24,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="index.php?dashboard" class="nav-link  <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?dashboard" || $_SERVER['REQUEST_URI']=="/localwebpanel/admin/" || $_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php" )?"active":"";?>">
+            <a href="index.php?dashboard" class="nav-link  <?= ($_SERVER['REQUEST_URI']=="/client/index.php?dashboard" || $_SERVER['REQUEST_URI']=="/client/" || $_SERVER['REQUEST_URI']=="/client/index.php" )?"active":"";?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -32,7 +32,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?outlets" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?outlets" || $_SERVER['REQUEST_URI']=="/localwebpanel/admin/view_outlets.php?id=".$_GET['id'])?"active":"";?>">
+            <a href="index.php?outlets" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?outlets" || $_SERVER['REQUEST_URI']=="/client/view_outlets.php?id=".$_GET['id'])?"active":"";?>">
               <i class="nav-icon fas fa-store-alt"></i>
               <p>
                 Outlets
@@ -40,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?users" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?users")?"active":"";?>">
+            <a href="index.php?users" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?users")?"active":"";?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Employees
@@ -49,7 +49,7 @@
           </li>
           <!-- <li class="nav-header">POS Settings</li>
           <li class="nav-item">
-            <a href="index.php?settings" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?settings")?"active":"";?>">
+            <a href="index.php?settings" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/clientclient/index.php?settings")?"active":"";?>">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 General Settings
@@ -57,7 +57,7 @@
             </a>
           </li>       
           <li class="nav-item">
-            <a href="index.php?defprod" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?defprod" || $_SERVER['REQUEST_URI']=="/localwebpanel/admin/editproductpage.php?id=" . $_GET['id'])?"active":"";?>">
+            <a href="index.php?defprod" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?defprod" || $_SERVER['REQUEST_URI']=="/client/editproductpage.php?id=" . $_GET['id'])?"active":"";?>">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Products
@@ -65,7 +65,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?defcat" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?defcat")?"active":"";?>">
+            <a href="index.php?defcat" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?defcat")?"active":"";?>">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>
                 Category
@@ -74,7 +74,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="index.php?defform" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?defform" || $_SERVER['REQUEST_URI']=="/localwebpanel/admin/editformulapage.php?id=" . $_GET['id'])?"active":"";?>">
+            <a href="index.php?defform" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?defform" || $_SERVER['REQUEST_URI']=="/client/editformulapage.php?id=" . $_GET['id'])?"active":"";?>">
               <i class="nav-icon fas fa-calculator"></i>
               <p>
                 Formula
@@ -82,7 +82,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?definv"class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?definv")?"active":"";?>">
+            <a href="index.php?definv"class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?definv")?"active":"";?>">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Inventory
@@ -90,7 +90,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?pmanagement"class="nav-link <?= ($_SERVER['REQUEST_URI']=="/localwebpanel/admin/index.php?pmanagement")?"active":"";?>">
+            <a href="index.php?pmanagement"class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?pmanagement")?"active":"";?>">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Price Management

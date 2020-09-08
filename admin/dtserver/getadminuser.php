@@ -10,13 +10,6 @@ if($role == "Admin") {
 } elseif ($role == "NotActiveUsers") {
     $FinalRole = " user_role = 'Client' AND status = 0";
 }
-// Database connection info
-$dbDetails = array(
-    'host' => 'gator3218.hostgator.com',
-    'user' => 'johnpale_testuse',
-    'pass' => 'password2019',
-    'db'   => 'johnpale_postest'
-);
 // DB table to use
 $table = 'admin_user';
 // Table's primary key
@@ -53,10 +46,11 @@ $columns = array(
 );
 // Include SQL query processing class
 require('../../resources/ssp.class.php');
+require('../../resources/conn.php');
 // Output data as json format
 echo json_encode(
      //SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns)
-    SSP::complex ( $_GET, $dbDetails, $table, $primaryKey, $columns, $whereResult=null, $whereAll=''.$FinalRole.'')
+    SSP::complex ( $_GET, ConnectionArray(), $table, $primaryKey, $columns, $whereResult=null, $whereAll=''.$FinalRole.'')
 );
 
 ?>

@@ -1,12 +1,5 @@
 <?php
-// Database connection info
 Include '../../resources/functions.php';
-$dbDetails = array(
-    'host' => 'gator3218.hostgator.com',
-    'user' => 'johnpale_testuse',
-    'pass' => 'password2019',
-    'db'   => 'johnpale_postest'
-);
 // DB table to use
 $table = 'admin_outlets';
 // Table's primary key
@@ -35,7 +28,7 @@ $columns = array(
 require('../../resources/ssp.class.php');
 // Output data as json format
 echo json_encode(
-    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns)
+    SSP::simple( $_GET, ConnectionArray(), $table, $primaryKey, $columns)
     //SSP::complex ( $_GET, $dbDetails, $table, $primaryKey, $columns, $whereResult=null, $whereAll='user_guid <> ""')
 );
 

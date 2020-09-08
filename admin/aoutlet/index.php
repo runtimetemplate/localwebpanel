@@ -13,6 +13,7 @@
     $MIN                = escape_string($_POST['MIN']);
     $MSN                = escape_string($_POST['MSN']);
     $PTUN               = escape_string($_POST['PTUN']);
+    $datenow = FullDateFormat24HR();
  	$acronym = getacronym($brand );
     $result = query("SELECT MAX(store_id) AS max_page FROM admin_outlets");
     $row = mysqli_fetch_array($result);
@@ -20,8 +21,8 @@
     $acro = $acronym.$storeid ;
     $guid = $_GET["id"];
     $table  = "admin_outlets";
-    $fields = "brand_name, store_name, user_guid, location_name, address, postal_code, municipality, province, active, tin_no, tel_no, Barangay , MIN, MSN, PTUN, synced";
-    $values = "'{$brand}','{$acro}','{$guid}','{$location_name}','{$address}','{$postal_code}','{$municipality}','{$province}','1','{$tin_no}','{$tel_no}','{$barangay}','{$MIN}','{$MSN}','{$PTUN}','Unsynced'";
+    $fields = "brand_name, store_name, user_guid, location_name, address, postal_code, municipality, province, active, tin_no, tel_no, Barangay , MIN, MSN, PTUN, synced,created_at";
+    $values = "'{$brand}','{$acro}','{$guid}','{$location_name}','{$address}','{$postal_code}','{$municipality}','{$province}','1','{$tin_no}','{$tel_no}','{$barangay}','{$MIN}','{$MSN}','{$PTUN}','Unsynced','$datenow'";
     save($table, $fields, $values);
     echo '<script>';
     echo 'alert("Successfully added an outlet!");';

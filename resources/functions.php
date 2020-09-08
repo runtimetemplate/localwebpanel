@@ -115,19 +115,25 @@
             return $uuid;
         }
     }
-    function getrows($userguid){
-        $query = query("SELECT user_fname, user_lname FROM admin_user WHERE user_guid = '$userguid'");
-        confirm($query);
-        $firstname = '';
-        while ($row = fetch_array($query)) {
-             $firstname = $row['user_fname'];
-        } 
-        return $firstname  ;
-    }
     function FullDateFormat24HR() {
       return  date("Y-m-d H:m:i");
     }
     function ReturnDateFormat() {
       return  date("Y-m-d");
+    }
+    function StoreName($id) {
+        $query = query("SELECT store_name FROM admin_outlets WHERE store_id = ". $id);
+        confirm($query);
+        $row = mysqli_fetch_array($query);
+        $store_name = $row['store_name'];
+        return $store_name;      
+    }
+    function getstorename($store_id) {
+        $query = query("SELECT * FROM admin_outlets WHERE store_id = '$store_id'" );
+        confirm($query);
+        while ($row = fetch_array($query)) {
+            $store_name = $row['store_name'];  
+        }
+         return $store_name;
     }
 ?>

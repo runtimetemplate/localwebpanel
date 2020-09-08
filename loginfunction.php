@@ -7,8 +7,8 @@ $password_nu 	= escape_string($_POST["password"]);
 $password_b64 = base64_encode($password_nu);
 $password_enc = md5($password_b64);
 
-$sql = "SELECT * FROM admin_user WHERE user_name = '".$username."' AND user_pass = '".$password_enc."' ";
-$result = mysqli_query($connection,$sql);
+$sql = "SELECT * FROM admin_user WHERE user_name = '".$username."' AND user_pass = '".$password_enc."' AND status = 1 ";
+$result = mysqli_query($connection ,$sql);
 if (row_count($result) > 0) { 
 	$row = mysqli_fetch_assoc($result);
 	if ($row['user_role'] =='Admin') { 	

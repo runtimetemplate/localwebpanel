@@ -1,12 +1,5 @@
 <?php
 include('../../resources/functions.php');
-// Database connection info
-$dbDetails = array(
-    'host' => 'gator3218.hostgator.com',
-    'user' => 'johnpale_testuse',
-    'pass' => 'password2019',
-    'db'   => 'johnpale_postest'
-);
 // DB table to use
 $table = 'admin_outlets';
 // Table's primary key
@@ -31,7 +24,8 @@ $columns = array(
                  return ('Pos Activated');
             }
         }
-    ),  
+    )
+    ,  
     array(
         'db'        => 'store_id',
         'dt'        => 5,
@@ -49,11 +43,11 @@ $columns = array(
     )
 );
 // Include SQL query processing class
-require('../../Resources/ssp.class.php');
+require('../../resources/ssp.class.php');
 // Output data as json format
 echo json_encode(
    // SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns)
-    SSP::complex ( $_GET, $dbDetails, $table, $primaryKey, $columns, $whereResult=null, $whereAll='user_guid = "'.$_GET['id'].'"')
+    SSP::complex ( $_GET, ConnectionArray(), $table, $primaryKey, $columns, $whereResult=null, $whereAll='user_guid = "'.$_GET['id'].'"')
 );
 ?>
 

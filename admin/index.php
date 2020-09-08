@@ -3,7 +3,7 @@
   if(!isset($_SESSION["webpanel"])) {
     header("Location:../");
   } else {
-    if ($_SERVER['REQUEST_URI'] == "/localwebpanel/admin/index.php" || $_SERVER['REQUEST_URI'] == "/localwebpanel/admin/index.php?dashboard" || $_SERVER['REQUEST_URI'] == "/localwebpanel/admin/") 
+    if ($_SERVER['REQUEST_URI'] == "/admin/index.php" || $_SERVER['REQUEST_URI'] == "/admin/index.php?dashboard" || $_SERVER['REQUEST_URI'] == "/admin/") 
     {
         include('dashboard.php');
     }     

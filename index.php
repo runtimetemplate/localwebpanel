@@ -29,50 +29,61 @@ if(isset($_SESSION['webpanel'])) {
 <link rel="stylesheet" type="text/css" href="dist/css/login.css">
 </head>
 <?php include_once("resources/functions.php")  ?>
-<body>
+<body class="hold-transition register-page" style="background-color: rgb(220, 122, 52);">
 
-<div class="login-form">
-    <div id="alert">
-        
-    </div>
-    <div class="loginform">
+<div id="alert">
+    
+</div>
+<div class="register-box">
+    <div class="card">
+    <div class="card-body register-card-body">
         <div class="text-center">
             <div class="form-group">
                 <img src="dist/img/fbwlogo.png" class="rounded" style="width: 200px;" alt="logo">
             </div>        
         </div>
-        <div class="text-center"><p>Online POS Management System</p></div>
+      <p class="login-box-msg">Onlie POS Management System</p>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Username" id="username" name="username">
+          <input type="text" class="form-control" placeholder="Username" id="username" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
-        </div>    
-        <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password" id="password"name="password">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                </div>
-            </div>     
-        </div>   
-        <div class="form-group">
-            <button type="submit" class="btn btn-block btn-secondary btn-sm" id="btn" name="submit">Sign in</button>
         </div>
-        <div class="clearfix">
-            <label class="float-left checkbox-inline"><input type="checkbox"> Remember me</label>    
-            <a href="#" class="float-right" style="color: #cfa54b">Forgot Password?</a>
-        </div>      
-            <p class="text-center small">Don't have an account? <a href="#" style="color: #cfa54b">Sign up here!</a></p>
-        <div class="text-center">
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+              <label for="agreeTerms">
+               Remember me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block" id="btn" name="submit">Sign in</button>
+          </div>
+        <p>Dont have an account?&nbsp;</p><a href="register.php" class="text-center">Click here!</a>
+    </div>
+            <div class="text-center">
             <div id="loader" class=""><div></div><div></div><div></div>
         </div>
-    </div>
-    </div>
+          <!-- /.col -->
+        </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
 </div>
-
+</div>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
@@ -122,10 +133,3 @@ $(document).ready(function(){
 </script>
 </body>
 </html>   
-  <!-- $("<div class='alert alert-info alert-dismissible'> <button type ='button' class = 'close' data-dismiss='alert' aria-hidden='true'>&times;</button><h5><i class='icon fas fa-info'></i> Alert!</h5>Info alert preview. This alert is dismissable.</div> " ).appendTo( "#alert" ); -->
-<!--     <div class='alert alert-info alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-        <h5><i class='icon fas fa-info'></i> Alert!</h5>
-        Info alert preview. This alert is dismissable.
-    </div>   -->
-
