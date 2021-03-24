@@ -8,7 +8,7 @@ $result = mysqli_query($connection, $sql);
 
 echo '<script>';
 echo 'alert("Updated Successfully");';
-echo 'self.location = "../index.php?defcat";';
+echo 'self.location = "../?defcat";';
 echo '</script>';
 
 ?>

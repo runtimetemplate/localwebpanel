@@ -132,10 +132,7 @@
   $(document).ready(function(){
     LoadDatatable('All');
   });  
-  function Send($id) {
-    var url = "view_outlets.php?id=" + $id;
-    window.location.href = url;
-  };
+
   function role() {
     var e = document.getElementById("Roles");
     var strUser = e.options[e.selectedIndex].value;

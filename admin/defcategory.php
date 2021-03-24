@@ -158,7 +158,7 @@ function LoadDatatable() {
     "autoWidth": false,
     "processing": true,
     "serverSide": true,
-    "ajax": "dtserver/getcategory.php"
+    "ajax": "dtserver/?category"
   });
 }
 </script>

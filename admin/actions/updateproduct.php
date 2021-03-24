@@ -24,6 +24,6 @@ $sql = "UPDATE admin_products_org SET `product_sku`= '$product_code',`product_na
 $result = query($sql);
 echo '<script>';
 echo 'alert("Updated Successfully");';
-echo 'self.location = "../index.php?defprod";';
+echo 'self.location = "../?defprod";';
 echo '</script>';
 ?>

@@ -25,29 +25,13 @@ $columns = array(
             }
         }
     )
-    ,  
-    array(
-        'db'        => 'store_id',
-        'dt'        => 5,
-        'formatter' => function( $d, $row ) {
-
-            if (outletcheck($d) == 0) {
-                return ('<button style="cursor:pointer;" name="view" onclick="Activate(this.id)"  id = "'.$d.'" value="Edit" class="btn btn-block btn-info btn-xs">&nbsp;Activate&nbsp;</button>');
-                
-            } elseif (outletcheck($d) == 1) {
-                return ('None');
-            } else {
-                return ('POS Activate');
-            }
-        }
-    )
 );
 // Include SQL query processing class
 require('../../resources/ssp.class.php');
 // Output data as json format
 echo json_encode(
-   // SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns)
-    SSP::complex ( $_GET, ConnectionArray(), $table, $primaryKey, $columns, $whereResult=null, $whereAll='user_guid = "'.$_GET['id'].'"')
+   SSP::simple( $_GET, ConnectionArray(), $table, $primaryKey, $columns)
+    //SSP::complex ( $_GET, ConnectionArray(), $table, $primaryKey, $columns, $whereResult=null, $whereAll='user_guid = "'.$_GET['id'].'"')
 );
 ?>
 

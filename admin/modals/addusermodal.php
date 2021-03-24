@@ -37,6 +37,26 @@
                 </div>         
               </div>
             </div>
+            <div class="form-group clearfix">
+              <div class="icheck-primary d-inline">
+                <input type="radio" id="radioPrimary1" value="Male" name="r1" checked>
+                <label for="radioPrimary1">
+                  Male
+                </label>
+              </div>
+              <div class="icheck-primary d-inline">
+                <input type="radio" id="radioPrimary2" value="Female" name="r1">
+                <label for="radioPrimary2">
+                  Female
+                </label>
+              </div>
+              <div class="icheck-primary d-inline">
+                <input type="radio" id="radioPrimary3" value="N/A" name="r1">
+                <label for="radioPrimary3">
+                  Prefer not to say
+                </label>
+              </div>
+            </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
@@ -60,10 +80,10 @@
                 </div>         
               </div>
             </div>
-            <div class="custom-file">
+<!--             <div class="custom-file">
               <input type="file" class="custom-file-input" name="image" id="customFile"  accept="image/*" required>
               <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="modal-footer justify-content-between">

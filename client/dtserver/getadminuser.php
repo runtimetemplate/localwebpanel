@@ -1,12 +1,12 @@
-<?php
+<?php session_start();
 $role = $_GET['role'];
 $FinalRole = "";
 if($role == "All") {
-    $FinalRole = " position IN('Head Crew','Crew')";
+    $FinalRole = " position IN('Head Crew','Crew') AND guid = '".$_SESSION['client_user_guid']."'";
 } elseif ($role == "HeadCrew") {
-    $FinalRole = " position = 'Head Crew'";
+    $FinalRole = " position = 'Head Crew' AND guid = '".$_SESSION['client_user_guid']."'";
 } elseif ($role == "Crew") {
-    $FinalRole = " position = 'Crew'";
+    $FinalRole = " position = 'Crew' AND guid = '".$_SESSION['client_user_guid']."'";
 }
 require('../../resources/functions.php');
 // DB table to use

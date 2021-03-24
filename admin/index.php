@@ -1,45 +1,98 @@
 <?php session_start();
 
   if(!isset($_SESSION["webpanel"])) {
+
     header("Location:../");
+    
   } else {
-    if ($_SERVER['REQUEST_URI'] == "/admin/index.php" || $_SERVER['REQUEST_URI'] == "/admin/index.php?dashboard" || $_SERVER['REQUEST_URI'] == "/admin/") 
-    {
+
+    if ($_SERVER['REQUEST_URI'] == "/admin/?dashboard" || $_SERVER['REQUEST_URI'] == "/admin/") {
+
         include('dashboard.php');
-    }     
-    if(isset($_GET['outlets'])) {
+
+    } elseif(isset($_GET['sales'])) {
+
+        include("sales.php");
+
+    } elseif(isset($_GET['outlets'])) {
+
         include("outlets.php");
-    }
-    if(isset($_GET['users'])) {
+
+    } elseif(isset($_GET['gtoid'])) {
+
+        include("view_outlets.php");
+
+    } elseif(isset($_GET['viewoutletsales'])) {
+
+        include("viewoutletsales.php");
+
+    } elseif(isset($_GET['users'])) {
+
         include("users.php");
-    }
-    if(isset($_GET['settings'])) {
+
+    } elseif(isset($_GET['settings'])) {
+
         include("generalsettings.php");
-    }
-    if(isset($_GET['defprod'])) {
+
+    } elseif(isset($_GET['defprod'])) {
+
         include("defproducts.php");
-    }
-    if(isset($_GET['defcat'])) {
+
+    } elseif(isset($_GET['edtprd'])) {
+
+        include("editproductpage.php");
+
+    } elseif(isset($_GET['defcat'])) {
+
         include("defcategory.php");
-    }
-    if(isset($_GET['defform'])) {
+
+    } elseif(isset($_GET['defform'])) {
+
         include("defformula.php");
-    }
-    if(isset($_GET['definv'])) {
+
+    } elseif(isset($_GET['edtfrm'])) {
+
+        include("editformulapage.php");
+        
+    } elseif(isset($_GET['definv'])) {
+
         include("definventory.php");
-    }
-    if(isset($_GET['pmanagement'])) {
+
+    } elseif(isset($_GET['pmanagement'])) {
+
         include("pmanagement.php");
+
+    } elseif(isset($_GET['inbox'])) {
+
+      include("message.php");
+
+    } elseif(isset($_GET['compose'])) {
+
+      include("compose.php");
+
+    } elseif(isset($_GET['profile'])) {
+
+      include("profile.php");
+
+    }else {
+
+      include '../resources/404.php';
+
     }
   }
 ?>
+
 <script type="text/javascript">
-  function logout() {
+    
+function logout() {
     $.ajax({  
-      url:"actions/logout.php",  
-      success:function(data){  
-       window.location = "../";
-      }  
+        url:"actions/logout.php",  
+        success:function(data){  
+            window.location = "../";
+        }  
     });  
-  }
+}
+function profile() {
+    window.location = "?profile";
+}
 </script>

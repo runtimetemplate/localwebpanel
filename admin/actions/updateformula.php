@@ -17,7 +17,7 @@ $sql = "UPDATE `admin_product_formula_org` SET `product_ingredients`= '$product_
 $result = query($sql);
 echo '<script>';
 echo 'alert("Updated Successfully");';
-echo 'self.location = "../index.php?defform";';
+echo 'self.location = "../?defform";';
 echo '</script>';
 ?>
 

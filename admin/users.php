@@ -68,13 +68,12 @@
                 <option value="Admin">Administrators</option>
                 <option value="Users">All Users</option>
                 <option value="ActiveUsers">Active Users</option>
-                <option value="NotActiveUsers">Not Active Users</option>
               </select>
             </div>
           </div>
           </div>
           <div class="card-body">
-            <table id="example1" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+            <table id="example1" class="table table-striped" style="width:100%">
               <thead>
                 <tr>
                   <th>Full Name</th>
@@ -101,13 +100,45 @@
               </tfoot>
             </table>
           </div>
-          <!-- /.card-body -->
         </div>
-        <!-- /.card -->
       </div>
-      <!-- /.col -->
     </div>
-      <!-- /.row -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Not activated accounts</h3>
+        </div>
+          <div class="card-body">
+            <table id="example2" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Full Name</th>
+                  <th>lastName</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Contact Number</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Full Name</th>
+                  <th>lastName</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Contact Number</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
   </section>
     <!-- /.content -->
 </div>
@@ -132,11 +163,12 @@
 <script>
   $(document).ready(function(){
     LoadDatatable('Admin');
+    LoadDatatableNotActive();
   });  
-  function Send($id) {
-    var url = "view_outlets.php?id=" + $id;
-    window.location.href = url;
-  };
+  // function Send($id) {
+  //   var url = "view_outlets.php?id=" + $id;
+  //   window.location.href = url;
+  // };
   function role() {
     var e = document.getElementById("Roles");
     var strUser = e.options[e.selectedIndex].value;
@@ -148,6 +180,7 @@
       "autoWidth": false,
       "processing": true,
       "serverSide": true,
+      "pageLength": 10,
       "ajax": "dtserver/getadminuser.php?role=" + strUser,
       "columnDefs": [
             {
@@ -167,6 +200,24 @@
       "processing": true,
       "serverSide": true,
       "ajax": "dtserver/getadminuser.php?role="+$role ,
+      "columnDefs": [
+            {
+                "render": function ( data, type, row ) {
+                    return data + ' ' + row[1];
+                },
+                "targets": 0
+            },
+            { "visible": false,  "targets": [ 1 ] }
+        ]
+    });
+  }
+  function LoadDatatableNotActive() {
+      $("#example2").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      "processing": true,
+      "serverSide": true,
+      "ajax": "dtserver/getnotactiveuser.php" ,
       "columnDefs": [
             {
                 "render": function ( data, type, row ) {
@@ -221,7 +272,36 @@ function showpass() {
     x.type = "password";
   }
 }
-
+function approve(id) {
+  $.ajax({  
+    url:"actions/approveuser.php",  
+    method:"POST",  
+    data:{id:id},  
+    success:function(data){ 
+        var table = $('#example2').DataTable();
+        $('#example2').empty();
+        table.destroy();
+        LoadDatatableNotActive();
+        alert("Approved!");
+    }  
+  }); 
+}
+function decline(id) {
+  var r = confirm("Are you sure do you want to decline this user ?");
+  if (r == true) {
+    $.ajax({  
+      url:"actions/declineuser.php",  
+      method:"POST",  
+      data:{id:id},  
+      success:function(data){ 
+        var table = $('#example2').DataTable();
+        $('#example2').empty();
+        table.destroy();
+        LoadDatatableNotActive();
+      }  
+    });  
+  } 
+}
 </script>
 <?php include_once('modals/editusermodal.php');?>
 <?php include_once('modals/addusermodal.php');?>

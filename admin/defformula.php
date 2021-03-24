@@ -133,7 +133,7 @@
 <?php include 'modals/editcategorymodal.php';?>
 <script>
 function editformula(id) {
-  window.location.href = "editformulapage.php?id=" + id; 
+  window.location.href = "?edtfrm=" + id; 
 }
 $( document ).ready(function() {
   LoadDatatable();

@@ -9,7 +9,7 @@ $sql = "INSERT INTO `admin_category`(`category_name`, `brand_name`, `origin`, `s
 $result = mysqli_query($connection, $sql);
 echo '<script>';
 echo 'alert("Updated Successfully");';
-echo 'self.location = "../index.php?defcat";';
+echo 'self.location = "../?defcat";';
 echo '</script>';
 
 ?>

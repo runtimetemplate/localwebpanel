@@ -18,7 +18,7 @@ $sql2 = "INSERT INTO `admin_pos_inventory_org`(`server_formula_id`, `product_ing
 query($sql2);
 echo '<script>';
 echo 'alert("Added Successfully");';
-echo 'self.location = "../index.php?definv";';
+echo 'self.location = "../?definv";';
 echo '</script>';
 
 

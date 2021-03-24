@@ -3,33 +3,73 @@
   if(!isset($_SESSION["clientpanel"])) {
     header("Location:../");
   } else {
-    if ($_SERVER['REQUEST_URI'] == "/client/index.php" || $_SERVER['REQUEST_URI'] == "/client/index.php?dashboard" || $_SERVER['REQUEST_URI'] == "/client/") 
-    {
+    if ($_SERVER['REQUEST_URI'] == "/client/" || $_SERVER['REQUEST_URI'] == "/client/?dashboard") {
+
         include('dashboard.php');
-    }     
-    if(isset($_GET['outlets'])) {
+
+    } elseif(isset($_GET['outlets'])) {
+
         include("outlets.php");
-    }
-    if(isset($_GET['users'])) {
+
+    } elseif(isset($_GET['users'])) {
+
         include("users.php");
+        
     }
-    if(isset($_GET['settings'])) {
+    elseif(isset($_GET['settings'])) {
         include("generalsettings.php");
     }
-    if(isset($_GET['defprod'])) {
+    elseif(isset($_GET['defprod'])) {
         include("defproducts.php");
     }
-    if(isset($_GET['defcat'])) {
+    elseif(isset($_GET['defcat'])) {
         include("defcategory.php");
     }
-    if(isset($_GET['defform'])) {
+    elseif(isset($_GET['defform'])) {
         include("defformula.php");
     }
-    if(isset($_GET['definv'])) {
+    elseif(isset($_GET['definv'])) {
         include("definventory.php");
     }
-    if(isset($_GET['pmanagement'])) {
+    elseif(isset($_GET['pmanagement'])) {
         include("pmanagement.php");
+    }
+    elseif(isset($_GET['sales'])) {
+      include("sales.php");
+    }
+    elseif(isset($_GET['transaction'])) {
+      include("transaction.php");
+    }
+    elseif(isset($_GET['inventory'])) {
+      include("inventory.php");
+    }
+    elseif(isset($_GET['store'])) {
+      include("viewmore.php");
+    }
+    elseif(isset($_GET['viewinv'])) {
+      include("viewinv.php");
+    }
+    elseif(isset($_GET['contact'])) {
+      include("contact.php");
+    }
+    elseif(isset($_GET['about'])) {
+      include("about.php");
+    }
+    elseif(isset($_GET['logs'])) {
+      include("logs.php");
+
+    } elseif(isset($_GET['syslogs'])) {
+      include("storelogs.php");
+
+    } elseif(isset($_GET['inbox'])) {
+      include("message.php");
+
+    } elseif(isset($_GET['profile'])) {
+      include("profile.php");
+
+    }else {
+      include '../resources/404.php';
+
     }
   }
 ?>
@@ -41,5 +81,11 @@
        window.location = "../";
       }  
     });  
+  }
+  function contactus() {
+    window.open('mailto:aiolosinnovativesolutions@gmail.com?subject=subject&body=body');
+  }
+  function profile() {
+    window.location = "?profile";
   }
 </script>

@@ -39,7 +39,7 @@
     confirm($send_update_query);
     echo '<script>';
     echo 'alert("Successfully updated a user!");';
-    echo 'self.location = "../index.php?users";';
+    echo 'self.location = "../?users";';
     echo '</script>';
 ?>
 

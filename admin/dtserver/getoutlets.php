@@ -15,7 +15,7 @@ $columns = array(
         'formatter' => function( $d, $row ) {
 
             return ('
-                    <a href="view_outlets.php?id='.$d.' " class="card-link view_data">
+                    <a href="?gtoid='.$d.' " class="card-link view_data">
                     View Outlets
                     </a>
                     ');
@@ -38,7 +38,7 @@ require('../../resources/conn.php');
 // Output data as json format
 echo json_encode(
     //SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns)
-    SSP::complex ( $_GET, ConnectionArray(), $table, $primaryKey, $columns, $whereResult=null, $whereAll=' user_role = "Client"')
+    SSP::complex ( $_GET, ConnectionArray(), $table, $primaryKey, $columns, $whereResult=null, $whereAll=' user_role = "Client" AND status = 1')
 );
 
 ?>

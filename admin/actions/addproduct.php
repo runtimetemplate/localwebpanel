@@ -28,6 +28,6 @@ $result = query($sql);
 // echo $sql;
 echo '<script>';
 echo 'alert("Product Added Successfully");';
-echo 'self.location = "../index.php?defprod";';
+echo 'self.location = "../?defprod";';
 echo '</script>';
 ?>

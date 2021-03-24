@@ -39,22 +39,21 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-  <section class="content">
+    <section class="content">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Clients</h3>
+              <h3 class="card-title"><i class="nav-icon fas fa-store-alt mr-1"></i>Stores with POS</h3>
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                   <tr>
                     <th>Brand Name</th>
                     <th>Store Name</th>
-                    <th>Status</th>
-                    <th>Store Name</th>
+                    <th>Location</th>
+                    <th>Zip Code</th>
                     <th>Status</th>                    
                   </tr>
                 </thead>
@@ -62,8 +61,8 @@
                   <tr>
                     <th>Brand Name</th>
                     <th>Store Name</th>
-                    <th>Status</th>
-                    <th>Store Name</th>
+                    <th>Location</th>
+                    <th>Zip Code</th>
                     <th>Status</th>                    
                   </tr>
                 </tfoot>
@@ -75,7 +74,40 @@
         </div>
         <!-- /.col -->
       </div>
-      <!-- /.row -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="nav-icon fas fa-store-alt mr-1"></i>Store List</h3>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Brand Name</th>
+                    <th>Store Name</th>
+                    <th>Location</th>
+                    <th>Zip Code</th>
+                    <th>Status</th>                    
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Brand Name</th>
+                    <th>Store Name</th>
+                    <th>Location</th>
+                    <th>Zip Code</th>
+                    <th>Status</th>                    
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
     </section>
     <!-- /.content -->
   </div>
@@ -107,34 +139,15 @@ $(function () {
     "processing": true,
     "serverSide": true,
     "ajax": "dtserver/getoutlets.php"
-    // ,
-    // "columnDefs": [
-    //       {
-    //           "render": function ( data, type, row ) {
-    //               return data + ' ' + row[3];
-    //           },
-    //           "targets": 0
-    //       },
-    //       { "visible": false,  "targets": [ 3 ] }
-    //   ]
+  });
+  $("#example1").DataTable({
+    "responsive": true,
+    "autoWidth": false,
+    "processing": true,
+    "serverSide": true,
+    "ajax": "dtserver/getoutlets1.php"
   });
 });
-function Send($id) {
-  var url = "view_outlets.php?id=" + $id;
-  window.location.href = url;
-};
-function viewdata(id) {
-var clientid = id;
-  $.ajax({  
-  url:"view_outlets.php",  
-  method:"post",  
-  data:{id:id},  
-  success:function(data){  
-    $('#outletdetail').html(data);  
-    $('#modal-default').modal("show");  
-  }  
-  });  
-}
 </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php session_start();
 include '../resources/conn.php';
 include '../resources/functions.php';
-$product_id =  $_GET['id'];
+$product_id =  $_GET['edtprd'];
 $sql = "SELECT * FROM admin_products_org WHERE product_id = " . $product_id;
 $result = query($sql);
 $row = mysqli_fetch_array($result);
@@ -52,7 +52,7 @@ $addonstype = $row['addontype'];
       </div><!-- /.container-fluid -->
     </div>
     <section class="content">
-      <form method="POST" action="actions/updateproduct.php?id=<?php echo $_GET['id'];?>" enctype="multipart/form-data">
+      <form method="POST" action="actions/updateproduct.php?id=<?php echo $_GET['edtprd'];?>" enctype="multipart/form-data">
         <div class="row">
         	<section class="col-lg-9">
   			    <div class="card card-default">

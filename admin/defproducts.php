@@ -123,7 +123,7 @@
 <script>
 
   function editproduct(id) {
-    window.location.href = "editproductpage.php?id=" + id;
+    window.location.href = "?edtprd=" + id;
   }
   function GetFormulaID() {
     var formulaid = $('#selectformula').val();

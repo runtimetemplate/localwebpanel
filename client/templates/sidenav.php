@@ -1,7 +1,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Innovention</span>
@@ -24,7 +24,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="index.php?dashboard" class="nav-link  <?= ($_SERVER['REQUEST_URI']=="/client/index.php?dashboard" || $_SERVER['REQUEST_URI']=="/client/" || $_SERVER['REQUEST_URI']=="/client/index.php" )?"active":"";?>">
+            <a href="?dashboard" class="nav-link  <?= ($_SERVER['REQUEST_URI']=="/client/?dashboard" || $_SERVER['REQUEST_URI']=="/client/" )?"active":"";?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -32,7 +32,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?outlets" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?outlets" || $_SERVER['REQUEST_URI']=="/client/view_outlets.php?id=".$_GET['id'])?"active":"";?>">
+            <a href="?inbox" class="nav-link  <?= ($_SERVER['REQUEST_URI']=="/client/?inbox")?"active":"";?>">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Inbox
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="?outlets" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/?outlets")?"active":"";?>">
               <i class="nav-icon fas fa-store-alt"></i>
               <p>
                 Outlets
@@ -40,63 +48,55 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?users" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?users")?"active":"";?>">
+            <a href="?users" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/?users")?"active":"";?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Employees
               </p>
             </a>
           </li>
-          <!-- <li class="nav-header">POS Settings</li>
+          <li class="nav-header">Reports</li>
           <li class="nav-item">
-            <a href="index.php?settings" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/clientclient/index.php?settings")?"active":"";?>">
-              <i class="nav-icon fas fa-cog"></i>
+            <a href="?sales" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/?sales" || $_SERVER['REQUEST_URI']=="/client/?store=".$_GET['store'])?"active":"";?>">
+              <i class="nav-icon fas fa-copy"></i>
               <p>
-                General Settings
+                Sales
               </p>
             </a>
           </li>       
           <li class="nav-item">
-            <a href="index.php?defprod" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?defprod" || $_SERVER['REQUEST_URI']=="/client/editproductpage.php?id=" . $_GET['id'])?"active":"";?>">
-              <i class="nav-icon fas fa-shopping-cart"></i>
-              <p>
-                Products
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="index.php?defcat" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?defcat")?"active":"";?>">
-              <i class="nav-icon fas fa-list-alt"></i>
-              <p>
-                Category
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="index.php?defform" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?defform" || $_SERVER['REQUEST_URI']=="/client/editformulapage.php?id=" . $_GET['id'])?"active":"";?>">
-              <i class="nav-icon fas fa-calculator"></i>
-              <p>
-                Formula
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="index.php?definv"class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?definv")?"active":"";?>">
-              <i class="nav-icon fas fa-box"></i>
+            <a href="?inventory" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/?inventory"|| $_SERVER['REQUEST_URI']=="/client/?viewinv=".$_GET['viewinv'])?"active":"";?>">
+              <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Inventory
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?pmanagement"class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/index.php?pmanagement")?"active":"";?>">
-              <i class="nav-icon fas fa-box"></i>
+            <a href="?logs" class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/?logs"|| $_SERVER['REQUEST_URI']=="/client/?syslogs=".$_GET['syslogs'])?"active":"";?>">
+              <i class="nav-icon fas fa-bug"></i>
               <p>
-                Price Management
+                System Logs
               </p>
             </a>
-          </li> -->
+          </li>
+          <li class="nav-header">Informations</li>
+          <li class="nav-item">
+            <a href="?about"class="nav-link <?= ($_SERVER['REQUEST_URI']=="/client/?about")?"active":"";?>">
+              <i class="nav-icon fas fa-info-circle"></i>
+              <p>
+                About Us
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#"class="nav-link" onclick="contactus();">
+              <i class="nav-icon fas fa-address-book"></i>
+              <p>
+                Contact Us
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>

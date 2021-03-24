@@ -15,6 +15,6 @@ $sql = "INSERT INTO `admin_product_formula_org`(`date_modified`,`product_ingredi
 $result = query($sql);
 echo '<script>';
 echo 'alert("Added Successfully");';
-echo 'self.location = "../index.php?defform";';
+echo 'self.location = "../?defform";';
 echo '</script>';
 ?>x`

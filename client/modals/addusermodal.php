@@ -13,14 +13,14 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="fullname" placeholder="Full Name" required>
+                  <input type="text" autocomplete="off" class="form-control" name="fullname" placeholder="Full Name" required>
                 </div>         
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="username" placeholder="Username" required>
+                  <input type="text" autocomplete="off" class="form-control" name="username" placeholder="Username" required>
                 </div>         
               </div>
             </div>
@@ -38,7 +38,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
               </div>
-              <input type="email" class="form-control" name="email" placeholder="Email" required>
+              <input type="email" autocomplete="off" class="form-control" name="email" placeholder="Email" required>
             </div>
             <div class="row">
               <div class="col-md-6">
@@ -74,7 +74,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="contactnumber" placeholder="Contact Number" required>
+                  <input type="text" autocomplete="off" class="form-control" name="contactnumber" placeholder="Contact Number" required>
                 </div>         
               </div>
               <div class="col-md-6">
@@ -82,7 +82,7 @@
                   <select class="form-control" name="gender" required> 
                     <option value="">Gender</option>
                     <option value="Male">Male</option>
-                    <option value="Felame">Felame</option>
+                    <option value="Female">Female</option>
                   </select>     
                 </div>         
               </div>

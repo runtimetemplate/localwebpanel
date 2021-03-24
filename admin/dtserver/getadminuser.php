@@ -2,13 +2,11 @@
 $role = $_GET['role'];
 $FinalRole = "";
 if($role == "Admin") {
-    $FinalRole = " user_role IN('Admin','Manager')";
+    $FinalRole = " user_role IN('Admin','Manager') AND status = 1";
 } elseif ($role == "Users") {
-    $FinalRole = " user_role = 'Client'";
+    $FinalRole = " user_role = 'Client' AND status = 1";
 } elseif ($role == "ActiveUsers") {
     $FinalRole = " user_role = 'Client' AND status = 1";
-} elseif ($role == "NotActiveUsers") {
-    $FinalRole = " user_role = 'Client' AND status = 0";
 }
 // DB table to use
 $table = 'admin_user';

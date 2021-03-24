@@ -1,5 +1,4 @@
 <?php session_start();
-
 if(isset($_SESSION['webpanel'])) {
     header("Location: admin/");
 } elseif (isset($_SESSION['clientpanel'])) {
@@ -13,7 +12,7 @@ if(isset($_SESSION['webpanel'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Registration Page</title>
+  <title>Innovention</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -31,15 +30,6 @@ if(isset($_SESSION['webpanel'])) {
 <div class="register-box">
   <div class="card">
     <div class="card-body register-card-body">
-<!--         <div class="form-group">
-          <label for="exampleInputFile">File input</label>
-          <div class="input-group">
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="exampleInputFile" accept=".gif, .jpg, .png" required>
-              <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-            </div>
-          </div>
-        </div> -->
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="First Name" id="firstname" name="firstname" required>
           <div class="input-group-append">
@@ -98,50 +88,47 @@ if(isset($_SESSION['webpanel'])) {
         </div>
         <div class="form-group clearfix">
           <div class="icheck-primary d-inline">
-            <input type="radio" id="radioPrimary1" value="male" name="r1" id="male" checked>
+            <input type="radio" id="radioPrimary1" value="Male" name="r1" id="Male" checked>
             <label for="radioPrimary1">
               Male
             </label>
           </div>
           <div class="icheck-primary d-inline">
-            <input type="radio" id="radioPrimary2" value="female" id="female" name="r1">
+            <input type="radio" id="radioPrimary2" value="Female" id="Female" name="r1">
             <label for="radioPrimary2">
               Female
             </label>
           </div>
+          <div class="icheck-primary d-inline">
+            <input type="radio" id="radioPrimary3" value="N/A" id="N/A" name="r1">
+            <label for="radioPrimary3">
+              Prefer not to say
+            </label>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          By clicking Sign Up, you agree to our <a href="#">Terms</a>.
+        </div>
+        <div class="row">
         </div>
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
-              </label>
+              <a href="/" class="text-center">I already have a membership</a>
             </div>
           </div>
-          <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block" id="btn" >Register</button>
+            <button type="submit" class="btn btn-primary btn-block" id="btn" >Sign Up</button>
           </div>
-          <!-- /.col -->
         </div>
-      <a href="index.php" class="text-center">I already have a membership</a>
+      
     </div>
-    <!-- /.form-box -->
-  </div><!-- /.card -->
+  </div>
 </div>
-<!-- /.register-box -->
-<!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-
-<!-- bs-custom-file-input -->
 <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-
-<!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -150,19 +137,20 @@ $(document).ready(function () {
 </script>
 <script>
 $(document).ready(function(){
-  $("#btn").click(function(){
-    var checked = $('input[name="r1"]:checked').val();
-    var firstname   = $("#firstname").val();
-    var lastname    = $("#lastname").val();
-    var username    = $("#username").val();
-    var email       = $("#email").val();
-    var contactnumber = $("#contactnumber").val();
-    var password    = $("#password").val();
+  $("#btn").click(function(id){
+    var checked        = $('input[name="r1"]:checked').val();
+    var firstname      = $("#firstname").val();
+    var lastname       = $("#lastname").val();
+    var username       = $("#username").val();
+    var email          = $("#email").val();
+    var contactnumber  = $("#contactnumber").val();
+    var password       = $("#password").val();
     var retypepassword = $("#retypepassword").val();
     $.ajax({  
       url:"registerfunction.php",  
       method:"post",  
       data:{
+        id:1,
         firstname:firstname,
         lastname:lastname,
         username:username,
@@ -175,7 +163,7 @@ $(document).ready(function(){
         success:function(data){        
           if (data == 'Registered Successfully') {
             alert('Registered Successfully! Please wait for the admins approval')
-            window.location.href = "index.php";
+            window.location.href = "/";
           } else {
              alert(data);
           }

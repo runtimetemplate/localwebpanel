@@ -13,7 +13,7 @@ $result = mysqli_query($connection, $sql);
 // echo $sql;
 echo '<script>';
 echo 'alert("Updated Successfully");';
-echo 'self.location = "../index.php?definv";';
+echo 'self.location = "../?definv";';
 echo '</script>';
 ?>
 
