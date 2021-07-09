@@ -3,7 +3,7 @@
 include('../../resources/functions.php');
 $store_arr = array();
 
-$string = $_POST['dateval'];
+$string = $_GET['dateval'];
 
 $array = explode(' - ', $string); //split string into array seperated by ', '
 $Count = 0;
@@ -28,12 +28,12 @@ $Date1 = date_format($Date1,"Y-m-d");
 $Date2 = date_create($Date2);
 $Date2 = date_format($Date2,"Y-m-d");
 
-$id = $_POST['id'];
+$id = $_GET['id'];
 
 
 if ($id == 0) {
 
-	$query = query("SELECT SUM(grosssales) as GrossSales, store_id FROM posrev.admin_daily_transaction WHERE guid = '".$_POST['guid']."' group by store_id order by grosssales desc LIMIT 5;");
+	$query = query("SELECT SUM(grosssales) as GrossSales, store_id FROM posrev.admin_daily_transaction WHERE guid = '".$_GET['guid']."' group by store_id order by grosssales desc LIMIT 5;");
 	confirm($query);
 
 	while ($row = fetch_array($query)) { 
@@ -46,7 +46,7 @@ if ($id == 0) {
 
 } elseif ($id == 1) {
 		
-	$query = query("SELECT SUM(grosssales) as GrossSales, store_id FROM posrev.admin_daily_transaction WHERE guid = '".$_POST['guid']."' AND DATE_FORMAT(created_at, '%Y-%m-%d') >= '".$Date1."' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '".$Date2."' group by store_id order by grosssales desc LIMIT 5;");
+	$query = query("SELECT SUM(grosssales) as GrossSales, store_id FROM posrev.admin_daily_transaction WHERE guid = '".$_GET['guid']."' AND DATE_FORMAT(created_at, '%Y-%m-%d') >= '".$Date1."' AND DATE_FORMAT(created_at, '%Y-%m-%d') <= '".$Date2."' group by store_id order by grosssales desc LIMIT 5;");
 
 	;
 	confirm($query);

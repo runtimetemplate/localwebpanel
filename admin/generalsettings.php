@@ -197,6 +197,9 @@
                     <div class="col-md-2">
                       <button type="button" id="alteradd" onclick="update();" class="btn btn-block btn-default btn-sm">UPDATE</button>
                     </div>  
+                    <div class="col-md-2">
+                      <button type="button" id="alteradd" onclick="newTable();" class="btn btn-block btn-default btn-sm">NEW TABLE</button>
+                    </div>  
 
                   </div>
                   <div class="form-group">
@@ -410,7 +413,10 @@ function alteradd() {
     }
   } 
 }
-
+function newTable() {
+  alternumber = 5;
+  alert("Input new table query");
+}
 function update() {
   alternumber = 4;
   alert("Please use double quote for STRING value.");
@@ -465,6 +471,14 @@ function checkalter() {
   } else if(alternumber == 4) {
     if (!query) {
       alert('Input update query first');
+    } else {
+      if (confirm('Are you sure you want to save this update query into the database?')) {
+        savealter(query);
+      } 
+    }
+  } else if(alternumber == 5) {
+    if (!query) {
+      alert('Input new table query first');
     } else {
       if (confirm('Are you sure you want to save this update query into the database?')) {
         savealter(query);

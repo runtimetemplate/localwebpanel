@@ -2,8 +2,11 @@
 include('../../resources/functions.php');
 $store_arr = array();
 
-$storeid = $_POST['storeid'];
-$string = $_POST['dateval'];
+$storeid = $_GET['storeid'];
+$string = $_GET['dateval'];
+
+// echo $storeid;
+// echo $string;
 $array = explode(' - ', $string); //split string into array seperated by ', '
 $Count = 0;
 $Date1 = "";

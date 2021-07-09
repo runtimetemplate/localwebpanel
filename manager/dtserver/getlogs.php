@@ -4,6 +4,12 @@ $ManagerGuid = $_SESSION['manager_store_guid'];
 if ($ManagerGuid == "") {
     $ManagerGuid = "'N/A'";
 }
+$StoreIDS     = $_SESSION["manager_store_id"];
+if ($StoreIDS == "") {
+$StoreIDS = "'N/A'";
+}
+
+
 // DB table to use
 $table = 'admin_outlets';
 // Table's primary key
@@ -29,7 +35,7 @@ require('../../resources/ssp.class.php');
 // Output data as json format
 echo json_encode(
    // SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns)
-    SSP::complex ( $_GET, ConnectionArray(), $table, $primaryKey, $columns, $whereResult=null, $whereAll='user_guid IN ('.$ManagerGuid.')')
+    SSP::complex ( $_GET, ConnectionArray(), $table, $primaryKey, $columns, $whereResult=null, $whereAll='store_id IN ('.$StoreIDS.')')
 );
 ?>
 

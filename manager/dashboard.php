@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -107,14 +108,60 @@
                         </div>
                         <input type="text" class="form-control float-right" id="datepicker-pick">
                         <div class="input-group-prepend">
-                            <button type="button" id="1" onclick="LoadBarGraph(this.id) ;" class="btn btn-block btn-secondary btn-flat">Search</button>          
+                            <button type="button" id="1" onclick="ApxChart(this.id) ;" class="btn btn-block btn-secondary btn-flat">Search</button>          
                        </div>
                       </div>              
                     </div>
                   </div>
-                  <div class="chart" id="appendchart">
-                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                  </div>                    
+                  <div id="ApexChart">
+                  </div>  
+                 <script type="text/javascript">      
+                    var optionsapex = {
+                      series: [
+                        {
+                          name: 'Total Sales',
+                          data: []
+                        }
+                      ],
+                      chart: {
+                        type: 'bar',
+                        height: 350,
+                        toolbar: {
+                          show: true
+                        },
+                        zoom: {
+                          enabled: true
+                        }
+                      },
+                    responsive: [{
+                      breakpoint: 480,
+                      options: {
+                        legend: {
+                          position: 'bottom',
+                          offsetX: -10,
+                          offsetY: 0
+                        }
+                      }
+                    }],
+                    plotOptions: {
+                      bar: {
+                        horizontal: false,
+                      },
+                    },
+                    xaxis: {
+                      categories: [],
+                    },
+                    legend: {
+                      position: 'bottom'
+                    },
+                    fill: {
+                      opacity: 1
+                    }
+                    };
+
+                    var chartApex = new ApexCharts(document.querySelector("#ApexChart"), optionsapex);
+                    chartApex.render();  
+                  </script>
                 </div>
               </div>
             </div>            
@@ -196,13 +243,58 @@
 <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="../dist/js/adminlte.js"></script>
 <script src="../dist/js/demo.js"></script>
-<script src="../plugins/chart.js/Chart.min.js"></script>
-<script src="../dist/js/utils.js"></script>
-<script>
 
+<script type="text/javascript">
+
+function ApxChart(id) {
+    $("#appendload").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
+
+    var storeid = "<?php echo $StoreIDS; ?>";
+    var dateval = $("#datepicker-pick").val();
+
+    $.getJSON('dtserver/gettopstoredash.php?id='+id+'&dateval='+dateval+'&storeid='+storeid, function(response) {
+        var len = response.length;
+
+        var ProductNames = [];
+        var TotalSales = [];
+
+        for(var i = 0; i<len; i++) {  
+            var BG = response[i]['BarGraphLabel'];      
+            var Total = response[i]['Total'];  
+
+            ProductNames.push(BG);
+            TotalSales.push(Total);
+        }       
+       
+        chartApex.updateOptions({
+          xaxis: {
+            categories: ProductNames
+          },
+          series: [{
+            name: 'Total Sales',
+            data: TotalSales
+          }],
+        });
+        $("#loading").remove();  
+    })
+}
+
+function updateConfig() {
+  var options = {};
+  options.timePicker = true;
+  options.ranges = {
+    'Today': [moment(), moment()],
+    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment().endOf('month')],
+    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+  };
+  $('#datepicker-pick').daterangepicker(options, function(start, end, label) {});   
+}
 $(document).ready(function(){ 
   GetSums();
-  LoadBarGraph(0);
+  ApxChart(0);
   updateConfig();
   var table = $('#example1').DataTable({
       "responsive": true,
@@ -264,116 +356,6 @@ function GetSums() {
   })
 }
 
-var barChartOptions = {
-    responsive              : true,
-    maintainAspectRatio     : false,
-    legend: {
-      position: 'bottom',
-      display: true,
-    },
-    scales: {
-      xAxes: [{
-        stacked: true,
-      }],
-      yAxes: [{
-        stacked: true
-      }]
-    }
-
-  }
-
-  var ctx = document.getElementById('barChart').getContext('2d');
-  var chart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: [],
-      datasets: [
-          {
-            label               : 'Total Sales',
-            backgroundColor     : 'rgb(130, 205, 255)',
-            borderColor         : 'rgb(130, 205, 255)',
-            pointRadius          : false,
-            pointColor          : '#3b8bba',
-            pointStrokeColor    : 'rgba(60,141,188,1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : []
-          }
-        ]
-    },
-    options: barChartOptions
-  });
-
-
-  function LoadBarGraph(id) {
-    $("#appendload").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
-    var storeid = "<?php echo $StoreIDS; ?>";
-    var dateval = $("#datepicker-pick").val();
-    if (id == 1) {
-      DeleteCanvas();
-    }
-    $.ajax({
-      url: 'dtserver/gettopstoredash.php',
-      type: 'post',
-      data: {"storeid":storeid, id:id, dateval:dateval},
-      dataType: 'json',
-      success:function(response){   
-        var len = response.length;
-        for(var i = 0; i<len; i++) {      
-          var ProductNames = response[i]['BarGraphLabel'];
-          var Qty = response[i]['Quantity'];          
-          var TotalSales = response[i]['Total'];  
-          addData(i,ProductNames,TotalSales,Qty);
-        }  
-        $("#loading").remove();   
-      }
-    })
-  }
-
-  function DeleteCanvas() {
-    $('#barChart').remove();
-    $('#appendchart').append('<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
-    ctx = document.getElementById('barChart').getContext('2d');
-      chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [
-            {
-              label               : 'Total Sales',
-              backgroundColor     : 'rgb(130, 205, 255)',
-              borderColor         : 'rgb(130, 205, 255)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            }
-          ]
-      },
-      options: barChartOptions
-    });
-  }
-  function addData(position, label, data1, data2) {   
-    chart.data.labels[position] = label;
-    chart.data.datasets[0].data[position] = data1
-    // chart.data.datasets[1].data[position] = data2;
-    chart.update();
-  }
-  function updateConfig() {
-    var options = {};
-    options.timePicker = true;
-    options.ranges = {
-      'Today': [moment(), moment()],
-      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-      'This Month': [moment().startOf('month'), moment().endOf('month')],
-      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-    };
-    $('#datepicker-pick').daterangepicker(options, function(start, end, label) {});   
-  }
 </script>
 </body>
 </html>

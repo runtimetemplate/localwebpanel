@@ -3,12 +3,12 @@
 include('../../resources/functions.php');
 $store_arr = array();
 
-$string = $_POST['dateval'];
+$string = $_GET['dateval'];
 $array = explode(' - ', $string); //split string into array seperated by ', '
 $Count = 0;
 $Date1 = "";
 $Date2 = "";
-$productID = $_POST['productid'];
+$productID = $_GET['productid'];
 
 foreach($array as $value) {
 
@@ -31,7 +31,7 @@ $Date2 = date_format($Date2,"Y-m-d");
 // echo "SELECT zreading, sum(quantity) as qty , sum(total) as totalsales  FROM posrev.admin_daily_transaction_details WHERE guid = '".$_SESSION['client_user_guid']."' AND store_id = '".$_POST['storeid']."' AND zreading >= '".$Date1."' and zreading <= '".$Date2."' AND product_id = ".$productID." group by zreading order by zreading asc";
 
 
-$query = query("SELECT zreading, sum(quantity) as qty , sum(total) as totalsales  FROM posrev.admin_daily_transaction_details WHERE guid = '".$_SESSION['client_user_guid']."' AND store_id = '".$_POST['storeid']."' AND zreading >= '".$Date1."' and zreading <= '".$Date2."' AND product_id = ".$productID." group by zreading order by zreading asc");
+$query = query("SELECT zreading, sum(quantity) as qty , sum(total) as totalsales  FROM posrev.admin_daily_transaction_details WHERE guid = '".$_SESSION['client_user_guid']."' AND store_id = '".$_GET['storeid']."' AND zreading >= '".$Date1."' and zreading <= '".$Date2."' AND product_id = ".$productID." group by zreading order by zreading asc");
 
 confirm($query);
 while ($row = fetch_array($query)) { 

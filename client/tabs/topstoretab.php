@@ -18,7 +18,7 @@
         </div>
         <input type="text" class="form-control float-right" id="datepicker-pick2">
         <div class="input-group-prepend">
-            <button type="button" id="3" onclick="GetStoreSales(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
+            <button type="button" id="3" onclick="ApxChart2(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
        </div>
       </div>              
     </div>
@@ -26,12 +26,95 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <div class="chart" id="appendchart2">
-      <canvas id="barChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-    </div>
+    <div id="ApexChart2"></div>
+     <script type="text/javascript">      
+      var optionsapex2 = {
+        series: [
+          {
+            name: 'Total Sales',
+            data: []
+          }
+        ],
+        chart: {
+          type: 'bar',
+          height: 350,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
+        },
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          legend: {
+            position: 'bottom',
+            offsetX: -10,
+            offsetY: 0
+          }
+        }
+      }],
+      plotOptions: {
+        bar: {
+          horizontal: false,
+        },
+      },
+      xaxis: {
+        categories: [],
+      },
+      legend: {
+        position: 'bottom'
+      },
+      fill: {
+        opacity: 1
+      }
+      };
+
+      var chartApex2 = new ApexCharts(document.querySelector("#ApexChart2"), optionsapex2);
+      chartApex2.render();    
+    </script>
   </div>
 </div>
 <script type="text/javascript">
+
+  function ApxChart2(btnid) {
+    if (btnid == 3){
+        $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
+    }
+    var dateval = $("#datepicker-pick2").val();
+    var storeid = $("#stores2").val();
+
+    $.getJSON('dtserver/getsales.php?btnid='+btnid+'&dateval='+dateval+'&storeid='+storeid, function(response) {
+
+        var len = response.length;
+        var StoreName = [];
+        var TotalSales = [];
+
+        for(var i = 0; i<len; i++) {  
+            var NM = response[i]['Name'];
+            var SL = response[i]['Sales'];           
+
+            StoreName.push(NM);
+            TotalSales.push(SL);
+        }
+            
+        chartApex2.updateOptions({
+          xaxis: {
+            categories: StoreName
+          },
+          series: [{
+            name: 'Total Sales',
+            data: TotalSales
+          }],
+        });
+        $("#loading").remove(); 
+    }) 
+
+  }
+
+</script>
+<!-- <script type="text/javascript">
   var ctx2 = document.getElementById('barChart2').getContext('2d');
   var chart2 = new Chart(ctx2, {
   type: 'bar',
@@ -108,4 +191,4 @@ function GetStoreSales(btnid) {
       options: barChartOptions
     });
   }
-</script>
+</script> -->

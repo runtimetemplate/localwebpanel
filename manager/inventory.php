@@ -59,7 +59,8 @@
               <tbody>
                 <?php
                 include_once '../resources/functions.php';
-                $sql = "SELECT COUNT(INV.loc_inventory_id) as TotalInventory, OT.store_name as StoreName, OT.store_id as StoreID, OT.address as Address, OT.Barangay as Brgy, OT.municipality as Municipality, OT.province as Province, OT.postal_code as Postal FROM posrev.admin_pos_inventory INV LEFT JOIN posrev.admin_outlets OT ON INV.store_id = OT.store_id WHERE INV.guid IN (".$ManagerGuids.") group by OT.store_name order by OT.store_id;";
+   
+                $sql = "SELECT COUNT(INV.loc_inventory_id) as TotalInventory, OT.store_name as StoreName, OT.store_id as StoreID, OT.address as Address, OT.Barangay as Brgy, OT.municipality as Municipality, OT.province as Province, OT.postal_code as Postal FROM posrev.admin_pos_inventory INV LEFT JOIN posrev.admin_outlets OT ON INV.store_id = OT.store_id WHERE INV.store_id IN (".$StoreIDS.") group by OT.store_name order by OT.store_id;";
                 $query = query($sql);
                 confirm($query);
                 while ($row = fetch_array($query)) { 

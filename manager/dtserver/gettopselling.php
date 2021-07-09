@@ -3,7 +3,7 @@
 include('../../resources/functions.php');
 $store_arr = array();
 
-$string = $_POST['dateval'];
+$string = $_GET['dateval'];
 $array = explode(' - ', $string); //split string into array seperated by ', '
 $Count = 0;
 $Date1 = "";
@@ -39,9 +39,9 @@ if ($StoreIDS == "") {
 $StoreIDS = "'N/A'";
 }
 
-if ($_POST['storeid'] == 'All') {
+if ($_GET['storeid'] == 'All') {
 	# code...
-	if ($_POST['btnid'] == 0) {
+	if ($_GET['btnid'] == 0) {
 		# code...
 		$query = query("SELECT product_name, SUM(total), SUM(quantity) FROM posrev.admin_daily_transaction_details WHERE store_id IN  (".$ManagerGuids.") group by product_name order by SUM(total) desc LIMIT 10;");
 		confirm($query);
@@ -66,7 +66,7 @@ if ($_POST['storeid'] == 'All') {
 	}
 } else {
 	# code...
-	$query = query("SELECT product_name, SUM(total), SUM(quantity) FROM posrev.admin_daily_transaction_details WHERE store_id = '".$_POST['storeid']."' AND zreading >= '".$Date1."' and zreading <= '".$Date2."' group by product_name  order by SUM(total) desc LIMIT 10;");
+	$query = query("SELECT product_name, SUM(total), SUM(quantity) FROM posrev.admin_daily_transaction_details WHERE store_id = '".$_GET['storeid']."' AND zreading >= '".$Date1."' and zreading <= '".$Date2."' group by product_name  order by SUM(total) desc LIMIT 10;");
 	confirm($query);
 	while ($row = fetch_array($query)) { 
 

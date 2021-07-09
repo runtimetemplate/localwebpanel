@@ -3,6 +3,11 @@
 require '../../resources/functions.php';
 $storeid = $_GET['storeid'];
 
+$query = "SELECT MIN FROM admin_outlets WHERE store_id = $storeid";
+$res = mysqli_query($connection, $query);
+$fetchrow = mysqli_fetch_array($res);
+$MIN = $fetchrow['MIN'];
+
 $inv_arr = array();
 
 $sql = "SELECT DATE_FORMAT(`date`, '%m/%d/%Y') as DATEF, stock_primary, sku FROM admin_pos_inventory WHERE store_id = $storeid ";
@@ -10,7 +15,7 @@ $sql = "SELECT DATE_FORMAT(`date`, '%m/%d/%Y') as DATEF, stock_primary, sku FROM
 $result = mysqli_query($connection, $sql);
 $Count = 2;
 while ($row = mysqli_fetch_array($result)) { 
-    $inv_arr[] = array("Date" => $row['DATEF'], "MIN" => "00001", "SKU" => $row['sku'], "Qty" => $row['stock_primary'], "Paycode" => "", "UnitPrice" => "0", "Gross" => "0", "Disc" => "0", "Vat" => "0" );
+    $inv_arr[] = array("Date" => $row['DATEF'], "MIN" => $MIN, "SKU" => $row['sku'], "Qty" => $row['stock_primary'], "Paycode" => "", "UnitPrice" => "0", "Gross" => "0", "Disc" => "0", "Vat" => "0" );
     $Count += 1;
 }
 

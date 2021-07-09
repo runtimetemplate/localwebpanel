@@ -17,7 +17,7 @@
                   </div>
                   <input type="text" class="form-control float-right" id="datepicker-pick4">
                   <div class="input-group-prepend">
-                      <button type="button"  onclick="GetExpenses();" class="btn btn-block btn-secondary btn-flat">Search</button>          
+                      <button type="button"  onclick="ApxChart4();" class="btn btn-block btn-secondary btn-flat">Search</button>          
                  </div>
                 </div>              
               </div>
@@ -25,9 +25,51 @@
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <div class="chart" id="appendchart4">
-                <canvas id="barChart4" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>                 
+              <div id="ApexChart4" class=""></div>
+                <script type="text/javascript">      
+                var optionsapex4 = {
+                  series: [
+                    {
+                      name: 'Total Expenses',
+                      data: []
+                    }
+                  ],
+                  chart: {
+                    type: 'bar',
+                    height: 350,
+                    toolbar: {
+                      show: true
+                    },
+                  },
+                  responsive: [{
+                    breakpoint: 480,
+                    options: {
+                      legend: {
+                        position: 'bottom',
+                        offsetX: -10,
+                        offsetY: 0
+                      }
+                    }
+                  }],
+                  plotOptions: {
+                    bar: {
+                      horizontal: false,
+                      columnWidth: '55%',
+                      endingShape: 'rounded'
+                    },
+                  },
+                  xaxis: {
+                    categories: [],
+                  },
+
+                  fill: {
+                    opacity: 1
+                  }
+                };
+
+                var chartApex4 = new ApexCharts(document.querySelector("#ApexChart4"), optionsapex3);
+                chartApex4.render();    
+              </script>                 
             </div>
           </div>
           <div class="row">
@@ -46,7 +88,44 @@
             </div>      
           </div>
         </div> 
-        <script type="text/javascript">
+    <script type="text/javascript">
+
+    function ApxChart4(btnid) {
+      if (btnid == 4){
+          $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
+      }
+      var dateval = $("#datepicker-pick4").val();
+      var storeid = $("#stores4").val();
+
+        $.getJSON('dtserver/getexpenses.php?dateval='+dateval+'&storeid='+storeid, function(response) {
+
+          var len = response.length;
+          var ZreadDate = [];
+          var Expenses = [];
+
+          for(var i = 0; i<len; i++) {  
+              var Zd = response[i]['ZreadDate'];
+              var Ex = response[i]['Expenses'];          
+
+              ZreadDate.push(Zd);
+              Expenses.push(Ex);
+
+          }
+          
+          $("#loading").remove();  
+          chartApex4.updateOptions({
+            xaxis: {
+              categories: ZreadDate
+            },
+            series: [{
+              name: 'Total Expenses',
+              data: Expenses
+            }],
+          })
+      })          
+    }
+    </script> 
+       <!--  <script type="text/javascript">
           var barChartOptions4 = {
               responsive              : true,
               maintainAspectRatio     : false,
@@ -173,5 +252,5 @@
         //     "bAutoWidth": false
         //   }); 
         // }
-        </script>
+        </script> -->
                  

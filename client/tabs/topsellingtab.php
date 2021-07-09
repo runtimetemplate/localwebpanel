@@ -17,20 +17,105 @@
         </div>
         <input type="text" class="form-control float-right" id="datepicker-pick">
         <div class="input-group-prepend">
-            <button type="button" id="1" onclick="search(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
+            <button type="button" id="1" onclick="ApxChart(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
        </div>
       </div>              
     </div>
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-12">
-    <div class="chart" id="appendchart">
-      <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-    </div>                      
+  <div class="col-sm-12"> 
+    <div id="ApexChart" class=""></div>
+    <script type="text/javascript">            
+      var optionsapex = {
+        series: [
+          {
+            name: 'Total Sales',
+            data: []
+          }, 
+          {
+            name: 'Total Quantity',
+            data: []
+          }
+        ],
+        chart: {
+          type: 'bar',
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+          },
+        },
+        xaxis: {
+          categories: [],
+        },
+
+        fill: {
+          opacity: 1
+        }
+      };
+
+      var chartApex = new ApexCharts(document.querySelector("#ApexChart"), optionsapex);
+      chartApex.render();    
+    </script>                   
   </div>
 </div>
 <script type="text/javascript">
+    function ApxChart(btnid) {
+    if (btnid == 1){
+        $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
+    }
+    var dateval = $("#datepicker-pick").val();
+    var storeid = $("#stores").val();
+
+    $.getJSON('dtserver/gettopselling.php?btnid='+btnid+'&dateval='+dateval+'&storeid='+storeid, function(response) {
+        var len = response.length;
+        var ProductNames = [];
+        var Qty = [];
+        var TotalSales = [];
+
+        for(var i = 0; i<len; i++) {  
+            var BG = response[i]['BarGraphLabel'];
+            var QT = response[i]['Quantity'];          
+            var TTL = response[i]['Total'];  
+
+            ProductNames.push(BG);
+            Qty.push(QT);
+            TotalSales.push(TTL);
+        }
+            
+        chartApex.updateOptions({
+          xaxis: {
+            categories: ProductNames
+          },
+          series: [{
+            name: 'Total Sales',
+            data: TotalSales
+          }, {
+            name: 'Total Quantity',
+            data: Qty
+          }],
+        });
+        $("#loading").remove(); 
+    })          
+  }
   var barChartOptions = {
     responsive              : true,
     maintainAspectRatio     : false,
@@ -47,104 +132,104 @@
       }]
     }
   } 
-    var ctx = document.getElementById('barChart').getContext('2d');
-    var chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [
-            {
-              label               : 'Total Sales',
-              backgroundColor     : 'rgb(130, 205, 255)',
-              borderColor         : 'rgb(130, 205, 255)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            },
-            {
-              label               : 'Total Quantity',
-              backgroundColor     : 'rgb(255, 158, 179)',
-              borderColor         : 'rgb(255, 158, 179)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            },
-          ]
-      },
-      options: barChartOptions
-    });  
-function search(btnid) {
-    if (btnid == 1){
-        $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
-    }
-    var dateval = $("#datepicker-pick").val();
-    var storeid = $("#stores").val();
-    $.ajax({
-      url: 'dtserver/gettopselling.php',
-      type: 'post',
-      data: {dateval:dateval,storeid:storeid,btnid:btnid},
-      dataType: 'json',
-      success:function(response){   
-        DeleteCanvas();
-        var len = response.length;
-        for(var i = 0; i<len; i++) {      
-          var ProductNames = response[i]['BarGraphLabel'];
-          var Qty = response[i]['Quantity'];          
-          var TotalSales = response[i]['Total'];  
-          addData(i,ProductNames,TotalSales,Qty);
-        }  
-        $("#loading").remove();   
-      }
-    })
-  }
+    // var ctx = document.getElementById('barChart').getContext('2d');
+    // var chart = new Chart(ctx, {
+    //   type: 'bar',
+    //   data: {
+    //     labels: [],
+    //     datasets: [
+    //         {
+    //           label               : 'Total Sales',
+    //           backgroundColor     : 'rgb(130, 205, 255)',
+    //           borderColor         : 'rgb(130, 205, 255)',
+    //           pointRadius          : false,
+    //           pointColor          : '#3b8bba',
+    //           pointStrokeColor    : 'rgba(60,141,188,1)',
+    //           pointHighlightFill  : '#fff',
+    //           pointHighlightStroke: 'rgba(60,141,188,1)',
+    //           data                : []
+    //         },
+    //         {
+    //           label               : 'Total Quantity',
+    //           backgroundColor     : 'rgb(255, 158, 179)',
+    //           borderColor         : 'rgb(255, 158, 179)',
+    //           pointRadius          : false,
+    //           pointColor          : '#3b8bba',
+    //           pointStrokeColor    : 'rgba(60,141,188,1)',
+    //           pointHighlightFill  : '#fff',
+    //           pointHighlightStroke: 'rgba(60,141,188,1)',
+    //           data                : []
+    //         },
+    //       ]
+    //   },
+    //   options: barChartOptions
+    // });  
+// function search(btnid) {
+//     if (btnid == 1){
+//         $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
+//     }
+//     var dateval = $("#datepicker-pick").val();
+//     var storeid = $("#stores").val();
+//     $.ajax({
+//       url: 'dtserver/gettopselling.php',
+//       type: 'post',
+//       data: {dateval:dateval,storeid:storeid,btnid:btnid},
+//       dataType: 'json',
+//       success:function(response){   
+//         DeleteCanvas();
+//         var len = response.length;
+//         for(var i = 0; i<len; i++) {      
+//           var ProductNames = response[i]['BarGraphLabel'];
+//           var Qty = response[i]['Quantity'];          
+//           var TotalSales = response[i]['Total'];  
+//           addData(i,ProductNames,TotalSales,Qty);
+//         }  
+//         $("#loading").remove();   
+//       }
+//     })
+//   }
 
-  function addData(position, label, data1, data2) {   
-    chart.data.labels[position] = label;
-    chart.data.datasets[0].data[position] = data1
-    chart.data.datasets[1].data[position] = data2;
-    chart.update();
-  }
+//   function addData(position, label, data1, data2) {   
+//     chart.data.labels[position] = label;
+//     chart.data.datasets[0].data[position] = data1
+//     chart.data.datasets[1].data[position] = data2;
+//     chart.update();
+//   }
 
-  function DeleteCanvas() {
-    $('#barChart').remove();
-    $('#appendchart').append('<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
-    ctx = document.getElementById('barChart').getContext('2d');
-    chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [
-            {
-              label               : 'Total Sales',
-              backgroundColor     : 'rgb(130, 205, 255)',
-              borderColor         : 'rgb(130, 205, 255)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            },
-            {
-              label               : 'Total Quantity',
-              backgroundColor     : 'rgb(255, 158, 179)',
-              borderColor         : 'rgb(255, 158, 179)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            }
-          ]
-      },
-      options: barChartOptions
-    });
-  }
+//   function DeleteCanvas() {
+//     $('#barChart').remove();
+//     $('#appendchart').append('<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+//     ctx = document.getElementById('barChart').getContext('2d');
+//     chart = new Chart(ctx, {
+//       type: 'bar',
+//       data: {
+//         labels: [],
+//         datasets: [
+//             {
+//               label               : 'Total Sales',
+//               backgroundColor     : 'rgb(130, 205, 255)',
+//               borderColor         : 'rgb(130, 205, 255)',
+//               pointRadius          : false,
+//               pointColor          : '#3b8bba',
+//               pointStrokeColor    : 'rgba(60,141,188,1)',
+//               pointHighlightFill  : '#fff',
+//               pointHighlightStroke: 'rgba(60,141,188,1)',
+//               data                : []
+//             },
+//             {
+//               label               : 'Total Quantity',
+//               backgroundColor     : 'rgb(255, 158, 179)',
+//               borderColor         : 'rgb(255, 158, 179)',
+//               pointRadius          : false,
+//               pointColor          : '#3b8bba',
+//               pointStrokeColor    : 'rgba(60,141,188,1)',
+//               pointHighlightFill  : '#fff',
+//               pointHighlightStroke: 'rgba(60,141,188,1)',
+//               data                : []
+//             }
+//           ]
+//       },
+//       options: barChartOptions
+//     });
+//   }
 </script>

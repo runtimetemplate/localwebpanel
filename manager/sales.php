@@ -14,8 +14,7 @@
   <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> 
-  <script src="../plugins/chart.js/Chart.min.js"></script>
-  <script src="../dist/js/utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -77,7 +76,7 @@
                           </div>
                           <input type="text" class="form-control float-right" id="datepicker-pick">
                           <div class="input-group-prepend">
-                              <button type="button" id="1" onclick="search(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
+                              <button type="button" id="1" onclick="ApxChart(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
                          </div>
                         </div>              
                       </div>
@@ -85,9 +84,56 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <div class="chart" id="appendchart">
-                        <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                      </div>                      
+                      <div id="ApexChart" class=""></div>
+                      <script type="text/javascript">            
+                        var optionsapex = {
+                          series: [
+                            {
+                              name: 'Total Sales',
+                              data: []
+                            }, 
+                            {
+                              name: 'Total Quantity',
+                              data: []
+                            }
+                          ],
+                          chart: {
+                            type: 'bar',
+                            height: 350,
+                            stacked: true,
+                            toolbar: {
+                              show: true
+                            },
+                          },
+                          responsive: [{
+                            breakpoint: 480,
+                            options: {
+                              legend: {
+                                position: 'bottom',
+                                offsetX: -10,
+                                offsetY: 0
+                              }
+                            }
+                          }],
+                          plotOptions: {
+                            bar: {
+                              horizontal: false,
+                              columnWidth: '55%',
+                              endingShape: 'rounded'
+                            },
+                          },
+                          xaxis: {
+                            categories: [],
+                          },
+
+                          fill: {
+                            opacity: 1
+                          }
+                        };
+
+                        var chartApex = new ApexCharts(document.querySelector("#ApexChart"), optionsapex);
+                        chartApex.render();    
+                      </script>
                     </div>
                   </div>
                 </div>
@@ -112,7 +158,7 @@
                           </div>
                           <input type="text" class="form-control float-right" id="datepicker-pick2">
                           <div class="input-group-prepend">
-                              <button type="button" id="3" onclick="GetStoreSales(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
+                              <button type="button" id="3" onclick="ApxChart2(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
                          </div>
                         </div>              
                       </div>
@@ -120,9 +166,54 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <div class="chart" id="appendchart2">
-                        <canvas id="barChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                      </div>
+                      <div id="ApexChart2"></div>
+                       <script type="text/javascript">      
+                        var optionsapex2 = {
+                          series: [
+                            {
+                              name: 'Total Sales',
+                              data: []
+                            }
+                          ],
+                          chart: {
+                            type: 'bar',
+                            height: 350,
+                            toolbar: {
+                              show: true
+                            },
+                            zoom: {
+                              enabled: true
+                            }
+                          },
+                        responsive: [{
+                          breakpoint: 480,
+                          options: {
+                            legend: {
+                              position: 'bottom',
+                              offsetX: -10,
+                              offsetY: 0
+                            }
+                          }
+                        }],
+                        plotOptions: {
+                          bar: {
+                            horizontal: false,
+                          },
+                        },
+                        xaxis: {
+                          categories: [],
+                        },
+                        legend: {
+                          position: 'bottom'
+                        },
+                        fill: {
+                          opacity: 1
+                        }
+                        };
+
+                        var chartApex2 = new ApexCharts(document.querySelector("#ApexChart2"), optionsapex2);
+                        chartApex2.render();    
+                      </script>
                     </div>
                   </div>
                 </div>
@@ -153,7 +244,7 @@
                           </div>
                           <input type="text" class="form-control float-right" id="datepicker-pick3">
                           <div class="input-group-prepend">
-                              <button type="button" id="4" onclick="GetProductSales(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
+                              <button type="button" id="4" onclick="ApxChart3(this.id);" class="btn btn-block btn-secondary btn-flat">Search</button>          
                          </div>
                         </div>              
                       </div>
@@ -161,126 +252,58 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <div class="chart" id="appendchart3">
-                        <canvas id="barChart3" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                        <script type="text/javascript">
-                          var barChartOptions3 = {
-                              responsive              : true,
-                              maintainAspectRatio     : false,
-                              legend: {
-                                position: 'bottom',
-                                display: true,
-                              },
-                              scales: {
-                                xAxes: [{
-                                  stacked: true,
-                                }],
-                                yAxes: [{
-                                  stacked: true
-                                }]
-                              }
-                          } 
-                          var ctx3 = document.getElementById('barChart3').getContext('2d');
-                          var chart3 = new Chart(ctx3, {
-                            type: 'bar',
-                            data: {
-                              labels: [],
-                              datasets: [
-                                  {
-                                    label               : 'Total Sales',
-                                    backgroundColor     : 'rgb(246, 112, 25)',
-                                    borderColor         : 'rgb(246, 112, 25)',
-                                    pointRadius         : true,
-                                    pointColor          : '#3b8bba',
-                                    pointStrokeColor    : 'rgba(60,141,188,1)',
-                                    pointHighlightFill  : '#fff',
-                                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                                    data                : []
-                                  },            
-                                  {
-                                    label               : 'Total Quantity',
-                                    backgroundColor     : 'rgb(245, 55, 148)',
-                                    borderColor         : 'rgb(245, 55, 148)',
-                                    pointRadius         : true,
-                                    pointColor          : '#3b8bba',
-                                    pointStrokeColor    : 'rgba(60,141,188,1)',
-                                    pointHighlightFill  : '#fff',
-                                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                                    data                : []
-                                  },
-                                ]
-                            },
-                            options: barChartOptions3
-                          });
-                          function GetProductSales(btnid) {
-                            if (btnid == 4){
-                                $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
+                      <div id="ApexChart3" class=""></div>
+                        <script type="text/javascript">      
+                        var optionsapex3 = {
+                          series: [
+                            {
+                              name: 'Total Sales',
+                              data: []
+                            }, 
+                            {
+                              name: 'Total Quantity',
+                              data: []
                             }
-                            var dateval = $("#datepicker-pick3").val();
-                            var storeid = $("#stores3").val();
-                            var productid = $("#productids").val();
-                            $.ajax({
-                              url: 'dtserver/getproductsales.php',
-                              type: 'post',
-                              data: {dateval:dateval,storeid:storeid,btnid:btnid,productid:productid},
-                              dataType: 'json',
-                              success:function(response){   
-                                DeleteCanvas3();
-                                var len = response.length;
-                                for(var i = 0; i<len; i++) {      
-                                  var ZreadDate = response[i]['Zread'];       
-                                  var ProductSales = response[i]['Sales'];  
-                                  var ProductQty = response[i]['Qty'];  
-                                  addData3(i,ZreadDate,ProductSales,ProductQty);
-                                }  
-                                $("#loading").remove();   
-                              }
-                            })
+                          ],
+                          chart: {
+                            type: 'bar',
+                            height: 350,
+                            toolbar: {
+                              show: true
+                            },
+                            zoom: {
+                              enabled: true
+                            }
+                          },
+                        responsive: [{
+                          breakpoint: 480,
+                          options: {
+                            legend: {
+                              position: 'bottom',
+                              offsetX: -10,
+                              offsetY: 0
+                            }
                           }
-                          function addData3(position, label, data1, data2) {   
-                            chart3.data.labels[position] = label;
-                            chart3.data.datasets[0].data[position] = data1
-                            chart3.data.datasets[1].data[position] = data2;
-                            chart3.update();
-                          }
-                          function DeleteCanvas3() {
-                            $('#barChart3').remove();
-                            $('#appendchart3').append('<canvas id="barChart3" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
-                            ctx3 = document.getElementById('barChart3').getContext('2d');
-                            chart3 = new Chart(ctx3, {
-                              type: 'bar',
-                              data: {
-                                labels: [],
-                                datasets: [
-                                  {
-                                    label               : 'Total Sales',
-                                    backgroundColor     : 'rgb(246, 112, 25)',
-                                    borderColor         : 'rgb(246, 112, 25)',
-                                    pointRadius         : true,
-                                    pointColor          : '#3b8bba',
-                                    pointStrokeColor    : 'rgba(60,141,188,1)',
-                                    pointHighlightFill  : '#fff',
-                                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                                    data                : []
-                                  },            
-                                  {
-                                    label               : 'Total Quantity',
-                                    backgroundColor     : 'rgb(245, 55, 148)',
-                                    borderColor         : 'rgb(245, 55, 148)',
-                                    pointRadius         : true,
-                                    pointColor          : '#3b8bba',
-                                    pointStrokeColor    : 'rgba(60,141,188,1)',
-                                    pointHighlightFill  : '#fff',
-                                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                                    data                : []
-                                  },
-                                  ]
-                              },
-                              options: barChartOptions3
-                            });
-                          }  
-                        </script>
-                      </div>                      
+                        }],
+                        plotOptions: {
+                          bar: {
+                            horizontal: false,
+                          },
+                        },
+                        xaxis: {
+                          categories: [],
+                        },
+                        legend: {
+                          position: 'bottom'
+                        },
+                        fill: {
+                          opacity: 1
+                        }
+                        };
+
+                        var chartApex3 = new ApexCharts(document.querySelector("#ApexChart3"), optionsapex3);
+                        chartApex3.render();    
+                      </script>
                     </div>
                   </div>
                 </div>
@@ -359,24 +382,7 @@
 <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="../dist/js/adminlte.js"></script>
 <script src="../dist/js/demo.js"></script>
-
 <script type="text/javascript">
-  var barChartOptions = {
-    responsive              : true,
-    maintainAspectRatio     : false,
-    legend: {
-      position: 'bottom',
-      display: true,
-    },
-    scales: {
-      xAxes: [{
-        stacked: true,
-      }],
-      yAxes: [{
-        stacked: true
-      }]
-    }
-  } 
 
   $(document).ready(function(){
     var table = $('#example1').DataTable({
@@ -387,9 +393,6 @@
         { width: '20%', targets: 3}
       ],    
     }); 
-
-    var ctx = document.getElementById('barChart').getContext('2d');
-    var ctx2 = document.getElementById('barChart2').getContext('2d');
     
    function updateConfig() {
       var options = {};
@@ -420,62 +423,6 @@
       $('#datepicker-pick2').daterangepicker(options2, function(start, end, label) {});   
       $('#datepicker-pick3').daterangepicker(options2, function(start, end, label) {});     
     }
-
-
-    
-    var chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [
-            {
-              label               : 'Total Sales',
-              backgroundColor     : 'rgb(130, 205, 255)',
-              borderColor         : 'rgb(130, 205, 255)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            },
-            {
-              label               : 'Total Quantity',
-              backgroundColor     : 'rgb(255, 158, 179)',
-              borderColor         : 'rgb(255, 158, 179)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            },
-          ]
-      },
-      options: barChartOptions
-    });    
-    
-    var chart2 = new Chart(ctx2, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [
-            {
-              label               : 'Total Sales',
-              backgroundColor     : 'rgb(83, 123, 196)',
-              borderColor         : 'rgb(83, 123, 196)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            },
-          ]
-      },
-      options: barChartOptions
-    });
-
  
    function LoadStores() {
     $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
@@ -496,65 +443,18 @@
               $("#stores2").append("<option value='"+id+"'>"+name+"</option>");   
               $("#stores3").append("<option value='"+id+"'>"+name+"</option>");     
           }
-          search(0);
+          ApxChart(0);
       }
     });
   }
   
-
-
-
-
-
   updateConfig();
   LoadStores();
-  GetStoreSales(2);
+  ApxChart2(2);
   LoadProductIDS();
 
   })
-  function addData(position, label, data1, data2) {   
-    chart.data.labels[position] = label;
-    chart.data.datasets[0].data[position] = data1
-    chart.data.datasets[1].data[position] = data2;
-    chart.update();
-  }
 
-  function DeleteCanvas() {
-    $('#barChart').remove();
-    $('#appendchart').append('<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
-    ctx = document.getElementById('barChart').getContext('2d');
-    chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [
-            {
-              label               : 'Total Sales',
-              backgroundColor     : 'rgb(130, 205, 255)',
-              borderColor         : 'rgb(130, 205, 255)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            },
-            {
-              label               : 'Total Quantity',
-              backgroundColor     : 'rgb(255, 158, 179)',
-              borderColor         : 'rgb(255, 158, 179)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            }
-          ]
-      },
-      options: barChartOptions
-    });
-  }
   function LoadProductIDS() {
     $.ajax({
       url: 'dtserver/getproductids.php',
@@ -574,90 +474,121 @@
   function ViewMore($storeID) {
     self.location = "?store="+ $storeID;
   }
-  function search(btnid) {
+
+  function ApxChart(btnid) {
     if (btnid == 1){
         $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
     }
     var dateval = $("#datepicker-pick").val();
     var storeid = $("#stores").val();
-    $.ajax({
-      url: 'dtserver/gettopselling.php',
-      type: 'post',
-      data: {dateval:dateval,storeid:storeid,btnid:btnid},
-      dataType: 'json',
-      success:function(response){   
-        DeleteCanvas();
+
+    $.getJSON('dtserver/gettopselling.php?btnid='+btnid+'&dateval='+dateval+'&storeid='+storeid, function(response) {
         var len = response.length;
-        for(var i = 0; i<len; i++) {      
-          var ProductNames = response[i]['BarGraphLabel'];
-          var Qty = response[i]['Quantity'];          
-          var TotalSales = response[i]['Total'];  
-          addData(i,ProductNames,TotalSales,Qty);
-        }  
-        $("#loading").remove();   
-      }
-    })
+        var ProductNames = [];
+        var Qty = [];
+        var TotalSales = [];
+
+        for(var i = 0; i<len; i++) {  
+            var BG = response[i]['BarGraphLabel'];
+            var QT = response[i]['Quantity'];          
+            var TTL = response[i]['Total'];  
+
+            ProductNames.push(BG);
+            Qty.push(QT);
+            TotalSales.push(TTL);
+        }
+            
+        chartApex.updateOptions({
+          xaxis: {
+            categories: ProductNames
+          },
+          series: [{
+            name: 'Total Sales',
+            data: TotalSales
+          }, {
+            name: 'Total Quantity',
+            data: Qty
+          }],
+        });
+        $("#loading").remove(); 
+    })          
   }
- 
-</script>
-<script type="text/javascript">
-  function GetStoreSales(btnid) {
+
+  function ApxChart2(btnid) {
     if (btnid == 3){
         $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
     }
     var dateval = $("#datepicker-pick2").val();
     var storeid = $("#stores2").val();
-    $.ajax({
-      url: 'dtserver/getsales.php',
-      type: 'post',
-      data: {dateval:dateval,storeid:storeid,btnid:btnid},
-      dataType: 'json',
-      success:function(response){   
-        DeleteCanvas2();
+
+    $.getJSON('dtserver/getsales.php?btnid='+btnid+'&dateval='+dateval+'&storeid='+storeid, function(response) {
+
         var len = response.length;
-        for(var i = 0; i<len; i++) {      
-          var StoreName = response[i]['Name'];       
-          var TotalSales = response[i]['Sales'];  
-          addData2(i,StoreName,TotalSales);
-        }  
-        $("#loading").remove();   
-      }
-    })
+        var StoreName = [];
+        var TotalSales = [];
+
+        for(var i = 0; i<len; i++) {  
+            var NM = response[i]['Name'];
+            var SL = response[i]['Sales'];           
+
+            StoreName.push(NM);
+            TotalSales.push(SL);
+        }
+            
+        chartApex2.updateOptions({
+          xaxis: {
+            categories: StoreName
+          },
+          series: [{
+            name: 'Total Sales',
+            data: TotalSales
+          }],
+        });
+        $("#loading").remove(); 
+    }) 
 
   }
+ function ApxChart3(btnid) {
+    if (btnid == 4){
+        $("#custom-tabs-four-tabContent").append("<div id='loading' class='overlay-wrapper'><div class='overlay'><i class='fas fa-3x fa-sync-alt fa-spin'></i></div></div>");
+    }
+    var dateval = $("#datepicker-pick3").val();
+    var storeid = $("#stores3").val();
+    var productid = $("#productids").val();
 
-  function addData2(position, label, data1) {   
-    chart2.data.labels[position] = label;
-    chart2.data.datasets[0].data[position] = data1
-    chart2.update();
-  }
-  function DeleteCanvas2() {
-    $('#barChart2').remove();
-    $('#appendchart2').append('<canvas id="barChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
-    ctx2 = document.getElementById('barChart2').getContext('2d');
-    chart2 = new Chart(ctx2, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [
-            {
-              label               : 'Total Sales',
-              backgroundColor     : 'rgb(83, 123, 196)',
-              borderColor         : 'rgb(83, 123, 196)',
-              pointRadius          : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : []
-            },
-          ]
-      },
-      options: barChartOptions
-    });
+      $.getJSON('dtserver/getproductsales.php?btnid='+btnid+'&dateval='+dateval+'&storeid='+storeid+'&productid='+productid+'&productid='+productid, function(response) {
+
+        var len = response.length;
+        var ZreadDate = [];
+        var ProductSales = [];
+        var ProductQty = [];
+
+        for(var i = 0; i<len; i++) {  
+            var Dt = response[i]['Zread'];
+            var Sl = response[i]['Sales'];          
+            var Qty = response[i]['Qty'];  
+
+            ZreadDate.push(Dt);
+            ProductSales.push(Sl);
+            ProductQty.push(Qty);
+        }
+        
+        $("#loading").remove();  
+        chartApex3.updateOptions({
+          xaxis: {
+            categories: ZreadDate
+          },
+          series: [{
+            name: 'Total Sales',
+            data: ProductSales
+          }, {
+            name: 'Total Quantity',
+            data: ProductQty
+          }],
+        })
+    })          
   }
 </script>
-
 </body>
 </html>
     

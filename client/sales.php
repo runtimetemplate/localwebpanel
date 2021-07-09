@@ -14,8 +14,7 @@
   <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> 
-  <script src="../plugins/chart.js/Chart.min.js"></script>
-  <script src="../dist/js/utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -227,14 +226,15 @@
             $("#stores3").append("<option value='"+id+"'>"+name+"</option>");     
             $("#stores4").append("<option value='"+id+"'>"+name+"</option>");  
         }
-        search(0);
+        //search(0);
+        ApxChart(0);
       }
     });
   }
   // LoadDatatable2();
   updateConfig();
   LoadStores();
-  GetStoreSales(2);
+  ApxChart2(2);
   LoadProductIDS();
 
   })

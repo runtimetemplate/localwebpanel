@@ -3,7 +3,7 @@
 include('../../resources/functions.php');
 $store_arr = array();
 
-$string = $_POST['dateval'];
+$string = $_GET['dateval'];
 $array = explode(' - ', $string); //split string into array seperated by ', '
 $Count = 0;
 $Date1 = "";
@@ -32,8 +32,8 @@ $Quantity = "";
 $Total = "";
 
 
-if ($_POST['storeid'] == 'All') {
-	if ($_POST['btnid'] == 2) { 
+if ($_GET['storeid'] == 'All') {
+	if ($_GET['btnid'] == 2) { 
 		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction WHERE guid = '".$_SESSION['client_user_guid']."' group by store_id order by grosssales asc;");
 		confirm($query);
 		while ($row = fetch_array($query)) { 
@@ -58,7 +58,7 @@ if ($_POST['storeid'] == 'All') {
 } else {
 
 
-		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction WHERE guid = '".$_SESSION['client_user_guid']."' AND store_id = '".$_POST['storeid']."' AND zreading >= '".$Date1."' and zreading <= '".$Date2."' group by store_id order by grosssales asc;");
+		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction WHERE guid = '".$_SESSION['client_user_guid']."' AND store_id = '".$_GET['storeid']."' AND zreading >= '".$Date1."' and zreading <= '".$Date2."' group by store_id order by grosssales asc;");
 		confirm($query);
 		while ($row = fetch_array($query)) { 
 

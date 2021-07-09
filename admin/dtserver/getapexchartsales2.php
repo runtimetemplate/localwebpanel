@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 
 include('../../resources/functions.php');
 $store_arr = array();
@@ -34,7 +34,7 @@ $Total = "";
 
 if ($_GET['storeid'] == 'All') {
 	if ($_GET['btnid'] == 2) { 
-		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction WHERE store_id IN (".$_SESSION['manager_store_id'].") group by store_id order by grosssales asc;");
+		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction group by store_id order by grosssales asc;");
 		confirm($query);
 		while ($row = fetch_array($query)) { 
 
@@ -44,7 +44,7 @@ if ($_GET['storeid'] == 'All') {
 
 		}
 	} else {
-		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction WHERE store_id IN (".$_SESSION['manager_store_id'].") AND zreading >= '".$Date1."' and zreading <= '".$Date2."' group by store_id order by grosssales asc;");
+		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction WHERE zreading >= '".$Date1."' and zreading <= '".$Date2."' group by store_id order by grosssales asc;");
 		confirm($query);
 		while ($row = fetch_array($query)) { 
 
@@ -58,7 +58,7 @@ if ($_GET['storeid'] == 'All') {
 } else {
 
 
-		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction WHERE store_id IN (".$_SESSION['manager_store_id'].") AND zreading >= '".$Date1."' and zreading <= '".$Date2."' group by store_id order by grosssales asc;");
+		$query = query("SELECT sum(grosssales), store_id FROM posrev.admin_daily_transaction WHERE store_id = '".$_GET['storeid']."' AND zreading >= '".$Date1."' and zreading <= '".$Date2."' group by store_id order by grosssales asc;");
 		confirm($query);
 		while ($row = fetch_array($query)) { 
 
